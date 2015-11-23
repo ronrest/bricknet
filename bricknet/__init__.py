@@ -51,6 +51,9 @@ class Layer(object):
 
     TODO: take into account Bias weights
     """
+    # ==========================================================================
+    #                                                                   __INIT__
+    # ==========================================================================
     def __init__(self, in_size=3, out_size=3, weights=None):
         """
 
@@ -70,8 +73,8 @@ class Layer(object):
 
             You can use pre-baked weights if you like.
         """
-
-        if weights == None:
+        # ======================================================================
+        if weights is None:
             # Initialise Layer Dimensions to values in arguments
             self.in_size = in_size
             self.out_size = out_size
