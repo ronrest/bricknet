@@ -63,8 +63,6 @@ class Layer(object):
         :param weights:  {matrix} (default = 3)
 
             You can use pre-baked weights if you like.
-
-        :return:
         """
         # Layer Dinensions
         self.size = size
@@ -79,4 +77,3 @@ class Layer(object):
             self.weights = np.random.rand(next_size, size)
         else:
             self.weights = weights
-
