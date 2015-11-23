@@ -52,28 +52,37 @@ class Layer(object):
     def __init__(self, size=3, next_size=3, weights=None):
         """
 
-        :param size: {int} (default = 3)
+        :param size: {int}{optional}(default = 3)
 
-            Size of this layer
+            Size of this layer.
 
-        :param next_size: {int} (default = 3)
+            NOTE: This value is ignored if you enter pre-baked weights
+
+        :param next_size: {int}{optional}(default = 3)
 
             Size of the next layer
 
-        :param weights:  {matrix} (default = 3)
+            NOTE: This value is ignored if you enter pre-baked weights
+
+        :param weights:  {numpy array}{optional} (default = 3)
 
             You can use pre-baked weights if you like.
         """
-        # Layer Dinensions
-        self.size = size
-        self.next_size = next_size
+
+        if weights == None:
+            # Initialise Layer Dimensions to values in arguments
+            self.size = size
+            self.next_size = next_size
+
+            # Initialise Weights to random values between 0 and 1
+            self.weights = np.random.rand(next_size, size)
+        else:
+            # Initialise Layer Dimensions based on pre-baked weights
+            self.size = weights.shape[1]
+            self.next_size = weights.shape[0]
+
+            # Initialise Weights to the pre-baked values that have been entered
+            self.weights = weights
 
         # Initialise Activations to zeroes
         self.activated_vals = np.zeros(size)
-
-        # Initialise Weights to random values between 0 and 1, unless prebaked
-        # values have been entered as an argument.
-        if weights == None:
-            self.weights = np.random.rand(next_size, size)
-        else:
-            self.weights = weights
