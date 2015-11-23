@@ -91,3 +91,54 @@ class Layer(object):
 
         # Initialise Activations to zeroes
         self.activated_vals = np.zeros(out_size)
+
+    # ==========================================================================
+    #                                                                    FORWARD
+    # ==========================================================================
+    def forward(self, input, return_val=True):
+        """
+        Performs forward propagation
+        :param input: {array like object}
+
+            The values to use as inputs to this layer.
+
+        :param return_val: {Boolean}
+
+            Should it return the output values? If False, then it updates the
+            values silently.
+
+        :return:{array}
+            The Output value (only if return_val = True)
+        """
+        # ======================================================================
+        agg = self.aggregate(input)
+        self.activated_vals = self.activate(agg)
+
+        if return_val:
+            return self.activated_vals
+
+
+    def aggregate(self, input):
+        """
+        A function for aggregating the raw input values.
+
+        :param input:
+        :return:
+        """
+        return self.weights.dot(input)
+
+    def activate(self, agg):
+        """
+        A function for handling how the aggregated values are then dealt with.
+
+        :param agg: {array-like}
+            the raw aggregated values.
+
+        :return:{array}
+
+            The activated values
+        """
+        return agg
+
+
+l = Layer(4,2)
