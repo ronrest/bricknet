@@ -48,19 +48,21 @@ class Layer(object):
     A template for layer objects
 
     Note you will need to implement your own methods.
+
+    TODO: take into account Bias weights
     """
-    def __init__(self, size=3, next_size=3, weights=None):
+    def __init__(self, in_size=3, out_size=3, weights=None):
         """
 
-        :param size: {int}{optional}(default = 3)
+        :param in_size: {int}{optional}(default = 3)
 
-            Size of this layer.
+            The number of inputs that this layer takes
 
             NOTE: This value is ignored if you enter pre-baked weights
 
-        :param next_size: {int}{optional}(default = 3)
+        :param out_size: {int}{optional}(default = 3)
 
-            Size of the next layer
+            The number of outputs from this layer.
 
             NOTE: This value is ignored if you enter pre-baked weights
 
@@ -71,18 +73,18 @@ class Layer(object):
 
         if weights == None:
             # Initialise Layer Dimensions to values in arguments
-            self.size = size
-            self.next_size = next_size
+            self.in_size = in_size
+            self.out_size = out_size
 
             # Initialise Weights to random values between 0 and 1
-            self.weights = np.random.rand(next_size, size)
+            self.weights = np.random.rand(out_size, in_size)
         else:
             # Initialise Layer Dimensions based on pre-baked weights
-            self.size = weights.shape[1]
-            self.next_size = weights.shape[0]
+            self.in_size = weights.shape[1]
+            self.out_size = weights.shape[0]
 
             # Initialise Weights to the pre-baked values that have been entered
             self.weights = weights
 
         # Initialise Activations to zeroes
-        self.activated_vals = np.zeros(size)
+        self.activated_vals = np.zeros(out_size)
