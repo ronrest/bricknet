@@ -1,1 +1,1 @@
-Detailed Description Goes Here
+A building blocks approach to Neural Networks

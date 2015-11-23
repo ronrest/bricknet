@@ -30,9 +30,9 @@ setup(
     name='bricknet',
     version=version,
     license='MIT',
-    keywords = ['keyword1', 'keyword2', 'keyword3'],
+    keywords = ['Neural Networks', 'machine learning', 'ann'],
 
-    description='My Short Description',
+    description='A building blocks approach to Neural Networks',
     long_description=long_description,
 
     # The project's main homepage.
@@ -57,8 +57,6 @@ setup(
         'License :: OSI Approved :: MIT License',
 
         'Intended Audience :: Developers',
-        'Intended Audience :: Education',
-        'Intended Audience :: Information Technology',
         'Intended Audience :: Science/Research',
 
         # Specify the Python versions you support here. In particular, ensure
@@ -74,12 +72,6 @@ setup(
 
         'Topic :: Scientific/Engineering',
         'Topic :: Scientific/Engineering :: Artificial Intelligence',
-        'Topic :: Scientific/Engineering :: Information Analysis',
-        'Topic :: Text Processing',
-        'Topic :: Text Processing :: Filters',
-        'Topic :: Text Processing :: General',
-        'Topic :: Text Processing :: Indexing',
-        'Topic :: Text Processing :: Linguistic',
         ],
 
     # You can just specify the packages manually here if your project is
