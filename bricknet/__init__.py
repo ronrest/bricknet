@@ -141,4 +141,3 @@ class Layer(object):
         return agg
 
 
-l = Layer(4,2)
