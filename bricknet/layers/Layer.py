@@ -78,6 +78,7 @@ class Layer(object):
             self.weights = weights
 
         # Initialise Preactivations and Activations to zeroes
+        #TODO: COnsider renaming activated_vals to post_activation_vals
         self.activated_vals = np.zeros(out_size)
         self.preactivated_vals = np.zeros(out_size)
 
