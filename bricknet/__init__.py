@@ -50,6 +50,8 @@ class Layer(object):
     Note you will need to implement your own methods.
 
     TODO: take into account Bias weights
+    TODO: Consider having a saturation warning if activated values are too high
+          for a given activation function.
     """
     # ==========================================================================
     #                                                                   __INIT__
