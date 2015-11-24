@@ -1,9 +1,8 @@
 import matplotlib.pyplot as plt
 from numpy import array
 import numpy as np
-from bricknet import activations
-from bricknet.layers.LayerSigmoid import LayerSigmoid
-
+import activations
+import layers
 
 
 ################################################################################

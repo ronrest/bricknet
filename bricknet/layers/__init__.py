@@ -1,3 +1,1 @@
-# from bricknet.layers.Layer import Layer
-# from bricknet.layers.LayerSigmoid import LayerSigmoid
-#
+from LSigmoid import LSigmoid
