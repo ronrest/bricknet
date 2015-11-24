@@ -19,7 +19,7 @@ class LayerSigmoid(Layer):
         """
         Layer.__init__(self, in_size, out_size, weights)
 
-    def activate(selg, agg):
+    def activate(self, agg):
         """
         Sigmoid Activation function
 
