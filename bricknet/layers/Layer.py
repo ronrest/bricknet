@@ -104,7 +104,8 @@ class Layer(object):
             The Output value (only if return_val = True)
         """
         # ======================================================================
-        agg = self.aggregate(input)
+        self.preactivated_vals = self.aggregate(input)
+        agg = self.preactivated_vals
         self.activated_vals = self.activate(agg)
 
         if return_val:
