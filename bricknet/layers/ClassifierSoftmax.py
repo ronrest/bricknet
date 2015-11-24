@@ -20,6 +20,40 @@ class ClassifierSoftmax(Layer):
         :return:
         """
         Layer.__init__(self, in_size, out_size, weights)
+        self.classification = np.zeros(out_size)
+
+    # ==========================================================================
+    # FORWARD
+    # ==========================================================================
+    def forward(self, input, return_val=True):
+        """
+        Performs forward propagation
+        :param input: {array like object}
+
+            The values to use as inputs to this layer.
+
+        :param return_val: {Boolean}
+
+            Should it return the output values? If False, then it updates the
+            values silently.
+
+        :return:{array}
+            The Output value (only if return_val = True)
+        """
+        # TODO: currently using arrray.max() method may result in occasionally
+        #       one hot vectors that are NOT "one hot" in cases where there are
+        #       ties. Find a better solution to avoid this.
+
+        # ======================================================================
+        self.preactivated_vals = self.aggregate(input)
+        agg = self.preactivated_vals
+        self.activated_vals = self.activate(agg)
+        # One hot vector of the class with the highest probability
+        self.classification = self.activated_vals == self.activated_vals.max()
+
+        if return_val:
+            return self.classification
+
 
     def activate(selg, agg):
         """
@@ -66,6 +100,7 @@ class ClassifierSoftmax(Layer):
             self.weights = self.weights + errors_input
 
         return errors_input
+
 
 
 
