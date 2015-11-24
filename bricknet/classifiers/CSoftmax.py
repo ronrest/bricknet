@@ -6,11 +6,11 @@
 __author__ = 'ronny'
 
 import numpy as np
-from bricknet import activations
-from bricknet.layers import Layer
+from .. import activations
+from ..layers import Layer
 
 
-class ClassifierSoftmax(Layer):
+class CSoftmax(Layer):
     def __init__(self, in_size=3, out_size=3, weights=None):
         """
 

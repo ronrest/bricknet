@@ -3,7 +3,7 @@ from numpy import array
 import numpy as np
 import activations
 import layers
-
+import classifiers
 
 ################################################################################
 #                                                           NEURAL_NETWORK CLASS
