@@ -19,6 +19,25 @@ class Layer(object):
     TODO: take into account Bias weights
     TODO: Consider having a saturation warning if activated values are too high
           for a given activation function.
+
+    ISSUE: The current implementation stores the post activated values in memory.
+           THis might potentially cause memory efficiency issues.
+           - COnsider maybe only storing these during the training phase, and
+             not storing them during normal usage.
+
+           - Run some tests to see which is more computationally expensive to
+             compute, the post activations, or the aggregated values (z). Store
+             which ever one involves the most computational time.
+
+           - Or maybe consider having this as a setting. Letting the user decide
+            if they want to store these values (for gains in speed, but at the
+            expense of memory useage) or if they want to not store (for minimal
+            memory useage, but slower to compute)
+              -  This could be a speed setting:
+                 1. Fastest. Stores both z, and a.
+                 2. medium. Stores one of z or a
+                 3. Slowest. Stores nothing?
+
     """
     # ==========================================================================
     #                                                                   __INIT__
