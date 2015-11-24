@@ -58,8 +58,13 @@ class Layer(object):
             # Initialise Weights to the pre-baked values that have been entered
             self.weights = weights
 
-        # Initialise Activations to zeroes
+        # Initialise Preactivations and Activations to zeroes
         self.activated_vals = np.zeros(out_size)
+        self.preactivated_vals = np.zeros(out_size)
+
+        # Initialise Errors Gradients of post-activation to zeroes
+        #self.errors = np.zeros(out_size)
+
 
     # ==========================================================================
     #                                                                    FORWARD
@@ -108,3 +113,13 @@ class Layer(object):
             The activated values
         """
         return agg
+
+    def back(self, input_vals, update_weights=True):
+        """
+        Back propagate the errors
+
+        :param input_vals:
+        :param update_weights:
+        :return:
+        """
+        return np.zeros(self.in_size)

@@ -15,3 +15,16 @@ def sigmoid(z):
     :return:
     """
     return 1.0 / (1 + np.exp(-z))
+
+
+def sigmoid_prime(self, z):
+    """
+    derivative of Sigmoid Function
+    return np.exp(-z) / ((1 + np.exp(-z)) ** 2)
+
+    :param z:
+    :return:
+    """
+    # More computationally efficient version.
+    sig = NN.sigmoid(z)
+    return sig * (1 - sig)
