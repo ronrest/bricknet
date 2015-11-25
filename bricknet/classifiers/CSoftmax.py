@@ -7,7 +7,7 @@ __author__ = 'ronny'
 
 import numpy as np
 from .. import activations
-from ..layers import Layer
+from ..layers.Layer import Layer
 
 
 class CSoftmax(Layer):
@@ -25,7 +25,7 @@ class CSoftmax(Layer):
     # ==========================================================================
     # FORWARD
     # ==========================================================================
-    def forward(self, input, return_val=True):
+    def forward(self, input, return_val=True, return_cost=False):
         """
         Performs forward propagation
         :param input: {array like object}
@@ -52,7 +52,26 @@ class CSoftmax(Layer):
         self.classification = self.activated_vals == self.activated_vals.max()
 
         if return_val:
-            return self.classification
+            if return_cost:
+                pass
+            else:
+                return self.classification
+        elif return_cost:
+            pass
+
+    def cost(self, y):
+        """
+        Returns the cost function of the hypothesised value as:
+
+        -log(hypothesised_probability_for_the_correct_class)
+
+        :param y: {array of booleans}
+
+            one-hot vector of the correct class with elements as booleans
+
+        :return:
+        """
+        return -np.log(self.activated_vals[y])
 
 
     def activate(selg, agg):
@@ -65,14 +84,12 @@ class CSoftmax(Layer):
         """
         return activations.softmax(agg)
 
-    def back(self, out_errors, input_vals, y, update_weights=True):
+    def back(self, input_vals, y, update_weights=True):
         """
-        Back propagate the errors
+        Back propagate the errors using the negative Log Likelihood Cost Function
 
-        :param out_errors: {arrray like}
-
-            error gradients at the post activation of the layer.
         :param input_vals:
+
         :param y:{array-like object of Boolean elements}
             An array of booleans, representing a one hot vector of the correct
             class y.
@@ -84,14 +101,8 @@ class CSoftmax(Layer):
         # z = self.aggregate(input_vals)
         z = self.preactivated_vals
 
-        #
-
         # Gradient of Softmax for the correct class WRT preactivations
-        h_y_is_c = self.activated_vals[y]
-        hc = self.acivated_vals
-        hy_only = np.ones(len(hc)) * h_y_is_c
-        errors_preactivation = h_y_is_c - hy_only * hc
-
+        errors_preactivation = self.activated_vals - y
 
         errors_input = self.weights.transpose().dot(errors_preactivation)
         errors_weights = np.outer(errors_preactivation, input_vals)
