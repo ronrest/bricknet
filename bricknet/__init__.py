@@ -4,6 +4,7 @@ import numpy as np
 import activations
 import layers
 import classifiers
+import eval
 
 ################################################################################
 #                                                           NEURAL_NETWORK CLASS
