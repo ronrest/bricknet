@@ -35,7 +35,8 @@ class Neural_Network(object):
         self.numlayers = len(self.layerSizes)
 
         # Initialised Weights as random values between 0 and 1
-        # TODO: add Layer objects instead. 
+        # TODO: add Layer objects instead.
+        # TODO: maybe include a gradient checking method build in
         self.Weights = [np.random.rand(self.layerSizes[i], \
                                        self.layerSizes[i+1]) \
                         for i in range(self.numlayers - 1)]
