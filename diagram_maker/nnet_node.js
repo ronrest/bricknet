@@ -82,10 +82,11 @@ function nnet_node(ctx, x, y, width_a=60, width_b=75, height=50, fill_a, fill_b,
 // #############################################################################
 //                                                                   NODE OBJECT
 // #############################################################################
-function Node(x,y, dims=dims1){
+function Node(x,y, dims=dims1, theme=theme1){
     this.x = x;
     this.y = y;
     this.dims = dims1;
+    this.theme = theme;
 
     //Method
     this.draw = function () {
@@ -106,6 +107,15 @@ function NodeDims(width_a=65, width_b=100, height=50, border=3){
 }
 
 
+// #############################################################################
+//                                                             NODE THEME OBJECT
+// #############################################################################
+function NodeTheme(a="#6699FF",b="#ff9900", border="#333333"){
+    this.a = a; //  Color of the pre-activation area.
+    this.b = b; //  Color of the post-activation area.
+    this.border= border;
+}
+
 
 // #############################################################################
 //                                                                       GLOBALS
@@ -113,3 +123,5 @@ function NodeDims(width_a=65, width_b=100, height=50, border=3){
 // Useful Dimensions
 var dims1 = new NodeDims();
 
+// Useful theme (Default theme colors)
+var theme1 = new NodeTheme();
