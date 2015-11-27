@@ -85,7 +85,7 @@ function nnet_node(ctx, x, y, width_a=60, width_b=75, height=50, fill_a, fill_b,
 function Node(x,y, dims=dims1, theme=theme1, n_in=1, n_out=1){
     this.x = x;
     this.y = y;
-    this.dims = dims1;
+    this.dims = dims;
     this.theme = theme;
 
     // Outer Points of interest
