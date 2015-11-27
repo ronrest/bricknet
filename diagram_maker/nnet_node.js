@@ -82,7 +82,7 @@ function nnet_node(ctx, x, y, width_a=60, width_b=75, height=50, fill_a, fill_b,
 // #############################################################################
 //                                                                   NODE OBJECT
 // #############################################################################
-function Node(x,y, dims=dims1, theme=theme1){
+function Node(x,y, dims=dims1, theme=theme1, n_in=1, n_out=1){
     this.x = x;
     this.y = y;
     this.dims = dims1;
@@ -94,13 +94,49 @@ function Node(x,y, dims=dims1, theme=theme1){
     this.mid_y = this.y + (this.dims.height / 2.0);
     this.end_y = this.y + this.dims.height;
 
+    // Connection Points of interest
+    this.in_wx = this.x + this.dims.radius;
+    this.in_wy = y_connection_offsets(n_in, this.dims.height, y=this.y);
+    this.out_wx = this.end_x - this.dims.radius;
+    this.out_wy = y_connection_offsets(n_out, this.dims.height, y=this.y);
+
+
+
     //Method
     this.draw = function () {
         document.write("I am drawing myself!!!");
     }
 
+
 }
 
+
+
+
+
+
+
+// #############################################################################
+//                                                          Y CONNECTION OFFSETS
+// #############################################################################
+// calculate the y offset positions realtive to the top corner for n number of
+// connections evenly spaced
+//
+// Completely inneficient way of doing it since all nodes in a layer
+// will be the same offset from the Top corner, so could just recycle the
+// calculation instead.
+function y_connection_offsets(n, height, y=0){
+    var wy = new Array(n);
+    if (n <= 1){
+        wy[0] = height/2.0;
+    } else {
+        var spacing = height / (n-1);
+        for (i = 0; i < n; i++) {
+            wy[i] = y + (i * spacing);
+        };
+    };
+    return wy;
+}
 
 // #############################################################################
 //                                                        NODE DIMENSIONS OBJECT
