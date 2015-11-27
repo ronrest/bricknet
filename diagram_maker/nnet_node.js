@@ -77,3 +77,19 @@ function nnet_node(ctx, x, y, width_a=60, width_b=75, height=50, fill_a, fill_b,
   ctx.stroke();
 
 }
+
+
+
+// #############################################################################
+//                                                                   NODE OBJECT
+// #############################################################################
+function Node(x,y){
+    this.x = x;
+    this.y = y;
+
+    //Method
+    this.draw = function () {
+        document.write("I am drawing myself!!!");
+    }
+}
+
