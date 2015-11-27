@@ -103,8 +103,8 @@ function Node(x,y, dims=dims1, theme=theme1, n_in=1, n_out=1){
 
 
     //Method
-    this.draw = function () {
-        document.write("I am drawing myself!!!");
+    this.draw = function (ctx) {
+        nnet_node(ctx, this.x, this.y, this.dims.width_a, this.dims.width_b, this.dims.height, this.theme.a, this.theme.b, this.theme.border, this.dims.border, this.dims.radius);
     }
 
 
