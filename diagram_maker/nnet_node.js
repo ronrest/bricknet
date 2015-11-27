@@ -99,10 +99,11 @@ function Node(x,y, dims=dims1, theme=theme1){
 // #############################################################################
 //                                                        NODE DIMENSIONS OBJECT
 // #############################################################################
-function NodeDims(width_a=65, width_b=100, height=50, border=3){
+function NodeDims(width_a=65, width_b=100, height=50, radius=10, border=3){
     this.width_a = width_a;
     this.width_b = width_b;
     this.height = height;
+    this.radius = radius;
     this.border= border;
 }
 
