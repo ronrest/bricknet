@@ -79,17 +79,37 @@ function nnet_node(ctx, x, y, width_a=60, width_b=75, height=50, fill_a, fill_b,
 }
 
 
-
 // #############################################################################
 //                                                                   NODE OBJECT
 // #############################################################################
-function Node(x,y){
+function Node(x,y, dims=dims1){
     this.x = x;
     this.y = y;
+    this.dims = dims1;
 
     //Method
     this.draw = function () {
         document.write("I am drawing myself!!!");
     }
+
 }
+
+
+// #############################################################################
+//                                                        NODE DIMENSIONS OBJECT
+// #############################################################################
+function NodeDims(width_a=65, width_b=100, height=50, border=3){
+    this.width_a = width_a;
+    this.width_b = width_b;
+    this.height = height;
+    this.border= border;
+}
+
+
+
+// #############################################################################
+//                                                                       GLOBALS
+// #############################################################################
+// Useful Dimensions
+var dims1 = new NodeDims();
 
