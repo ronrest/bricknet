@@ -88,6 +88,12 @@ function Node(x,y, dims=dims1, theme=theme1){
     this.dims = dims1;
     this.theme = theme;
 
+    // Outer Points of interest
+    this.mid_x = this.x + this.dims.width_a;
+    this.end_x = this.mid_x + this.dims.width_b;
+    this.mid_y = this.y + (this.dims.height / 2.0);
+    this.end_y = this.y + this.dims.height;
+
     //Method
     this.draw = function () {
         document.write("I am drawing myself!!!");
