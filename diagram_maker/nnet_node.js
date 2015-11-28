@@ -255,9 +255,8 @@ function imageFromUrl(context, url, x, y) {
 }
 
 
-//blue
-//green = "orange"
-function latexOnCanvas(context, latex, x, y, color="black", size=10){
+// color = in hexadecimal notation
+function latexOnCanvas(context, latex, x, y, color="000000", size=10){
     var url = "http://latex.codecogs.com/png.latex?"
     var sizes= [];
     sizes[5] = "tiny"
@@ -267,6 +266,7 @@ function latexOnCanvas(context, latex, x, y, color="black", size=10){
     sizes[18] = "LARGE"
     sizes[20] = "huge"
 
+    color = color.replace("#", "");
     var colorCode = "\\fg_COLOR&space;".replace("COLOR", color);
     var sizeCode = "\\SIZE&space;".replace("SIZE", sizes[size]);
 
@@ -294,3 +294,10 @@ function SciWeavers_latexOnCanvas(context, latex, x, y, color="Black", size=10){
     // render the result of the url on the canvas
     imageFromUrl(context, url, x, y);
 }
+
+
+
+
+
+
+
