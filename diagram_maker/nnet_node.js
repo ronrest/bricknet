@@ -190,6 +190,20 @@ function NodeTheme(a="#6699FF",b="#ff9900", border="#333333"){
 
 
 // #############################################################################
+//                                                    EXTRACT_COLORS_FROM_THEMES
+// #############################################################################
+// Extracts the preactivation colors from a list of node themes
+// Returns an array of colors
+function extract_colors_from_themes(themes){
+    var cols = [0];
+    for (var i = 0; i < themes.length; i++){
+        cols[i] = themes[i].a;
+    };
+    return cols;
+};
+
+
+// #############################################################################
 //                                                                       GLOBALS
 // #############################################################################
 // Useful Dimensions
