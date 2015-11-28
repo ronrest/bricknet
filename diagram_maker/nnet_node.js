@@ -107,13 +107,40 @@ function Node(x,y, dims=dims1, theme=theme1, n_in=1, n_out=1){
         nnet_node(ctx, this.x, this.y, this.dims.width_a, this.dims.width_b, this.dims.height, this.theme.a, this.theme.b, this.theme.border, this.dims.border, this.dims.radius);
     }
 
+    // =========================================================================
+    //                                                              CONNECT_TO()
+    // =========================================================================
+    // wa = index of the weight connection from this node
+    //      value of -1 means we will just connect to the center of the node.
+    // wb = index of the weight connection on the node we are connecting to.
+    //      value of -1 means we will just connect to the center of the node
+    // d = How far the bezier control point should stick out relative to the
+    //     starting position.
+    // d2 = as per d, but relative to the end point.
+    // =========================================================================
+    this.connect_to = function(ctx, next_node, wa=-1, wb=-1, color="#FF0000" ,size=3, d=50, d2=50){
+        // ---------------------------------------------------------------------
+        //                                           Calculate the y coordinates
+        // ---------------------------------------------------------------------
+        // Calculate the y coordinate of the starting point
+        if (wa == -1){
+            var from_y = this.mid_y;
+        } else {
+            var from_y = this.out_wy[wa];
+        }
+        // Calculate the y coordinate of the end point
+        if (wb == -1){
+            var to_y = next_node.mid_y;
+        } else {
+            var to_y = next_node.in_wy[wb];
+        }
 
+        // ---------------------------------------------------------------------
+        //                                                Draw Bezier Connection
+        // ---------------------------------------------------------------------
+        bez(ctx, this.out_wx, from_y, next_node.in_wx, to_y, size, color, d, d2)
+    }
 }
-
-
-
-
-
 
 
 // #############################################################################
