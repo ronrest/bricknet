@@ -128,7 +128,7 @@ function Node(x,y, dims=dims1, theme=theme1, n_in=1, n_out=1){
 function y_connection_offsets(n, height, y=0){
     var wy = new Array(n);
     if (n <= 1){
-        wy[0] = height/2.0;
+        wy[0] = y + (height/2.0);
     } else {
         var spacing = height / (n-1);
         for (i = 0; i < n; i++) {
