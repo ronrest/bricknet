@@ -72,8 +72,8 @@ function LayerOfNodes(x,y, n, dims=dims1, themes=theme1, n_in=1, n_out=1, space=
 
         for (var i = 0; i < next_layer.n; i++){
             to_node = next_layer.nodes[i];
-            for (var j = 0; j < n1; j++){
-                from_node = l1.nodes[j]
+            for (var j = 0; j < this.n; j++){
+                from_node = this.nodes[j]
 
                 // handle psoition along side edges the nodes
                 if (use_wa){wa = i}; // Index of connection on edge of from_node
