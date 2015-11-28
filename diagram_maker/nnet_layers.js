@@ -28,7 +28,7 @@ function LayerOfNodes(x,y, n, dims=dims1, themes=theme1, n_in=1, n_out=1, space=
     // CREATE NODES
     this.nodes = new Array(n);
     for (i = 0; i < this.n; i++) {
-        this.nodes[i] = new Node(x, layer_ys[i], dims=this.dims, theme=this.themes[i]);
+        this.nodes[i] = new Node(x, layer_ys[i], dims=this.dims, theme=this.themes[i], n_in, n_out);
     }
 
     // DRAW METHOD
