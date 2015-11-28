@@ -117,8 +117,9 @@ function Node(x,y, dims=dims1, theme=theme1, n_in=1, n_out=1){
     // d = How far the bezier control point should stick out relative to the
     //     starting position.
     // d2 = as per d, but relative to the end point.
+    // alpha = alpha of the connection line
     // =========================================================================
-    this.connect_to = function(ctx, next_node, wa=-1, wb=-1, color="#FF0000" ,size=3, d=50, d2=50){
+    this.connect_to = function(ctx, next_node, wa=-1, wb=-1, color="#FF0000" ,size=3, d=50, d2=50, alpha=0.3){
         // ---------------------------------------------------------------------
         //                                           Calculate the y coordinates
         // ---------------------------------------------------------------------
@@ -138,7 +139,7 @@ function Node(x,y, dims=dims1, theme=theme1, n_in=1, n_out=1){
         // ---------------------------------------------------------------------
         //                                                Draw Bezier Connection
         // ---------------------------------------------------------------------
-        bez(ctx, this.out_wx, from_y, next_node.in_wx, to_y, size, color, d, d2)
+        bez(ctx, this.out_wx, from_y, next_node.in_wx, to_y, size, color, d, d2, alpha)
     }
 }
 
