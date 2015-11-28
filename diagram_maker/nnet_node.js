@@ -272,3 +272,21 @@ function latexOnCanvas(context, latex, x, y, color="black", size=10){
     // render the result of the url on the canvas
     imageFromUrl(context, url, x, y);
 }
+
+
+function SciWeavers_latexOnCanvas(context, latex, x, y, color="Black", size=10){
+    // Note it renders ugly and choppy.
+    var url = "http://www.sciweavers.org/tex2img.php?eq="
+    var more_settings = "&bc=Transparent&im=png&ff=fourier&edit=0"
+
+    var colorCode = "&fc=" + color;
+    //        "&fc=Orange"
+    //          White
+    var sizeCode = "&fs=" + size.toString();
+
+    // Put the pieces of the URL together.
+    url += latex + more_settings + colorCode + sizeCode;
+
+    // render the result of the url on the canvas
+    imageFromUrl(context, url, x, y);
+}
