@@ -131,12 +131,13 @@ function y_connection_offsets(n, height, y=0){
         wy[0] = y + (height/2.0);
     } else {
         var spacing = height / (n-1);
-        for (i = 0; i < n; i++) {
+        for (var i = 0; i < n; i++) {
             wy[i] = y + (i * spacing);
         };
     };
     return wy;
 }
+
 
 // #############################################################################
 //                                                        NODE DIMENSIONS OBJECT
