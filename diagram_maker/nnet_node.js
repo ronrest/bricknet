@@ -249,3 +249,26 @@ function imageFromUrl(context, url, x, y) {
           context.drawImage(this, x, y);
         };
 }
+
+
+//blue
+//green = "orange"
+function latexOnCanvas(context, latex, x, y, color="black", size=10){
+    var url = "http://latex.codecogs.com/png.latex?"
+    var sizes= [];
+    sizes[5] = "tiny"
+    sizes[9] = "small"
+    sizes[10] = ""
+    sizes[12] = "large"
+    sizes[18] = "LARGE"
+    sizes[20] = "huge"
+
+    var colorCode = "\\fg_COLOR&space;".replace("COLOR", color);
+    var sizeCode = "\\SIZE&space;".replace("SIZE", sizes[size]);
+
+    // Put the pieces of the URL together.
+    url += colorCode + sizeCode + latex;
+
+    // render the result of the url on the canvas
+    imageFromUrl(context, url, x, y);
+}
