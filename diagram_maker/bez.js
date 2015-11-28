@@ -7,8 +7,7 @@ function bez(context, x, y, x2, y2, size=3, d=50){
 
       var ct1_x = x + d;
       var ct1_y = y;
-
-      var ct2_x = x2 - d;
+      var ct2_x = x2 - d2;
       var ct2_y = y2;
 
 
