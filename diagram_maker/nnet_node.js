@@ -82,7 +82,7 @@ function nnet_node(ctx, x, y, width_a=60, width_b=75, height=50, fill_a, fill_b,
 // #############################################################################
 //                                                                   NODE OBJECT
 // #############################################################################
-function Node(x,y, dims=dims1, theme=theme1, n_in=1, n_out=1){
+function Node(x,y, dims=dims1, theme=THEME_DEFAULT, n_in=1, n_out=1){
     this.x = x;
     this.y = y;
     this.dims = dims;
@@ -210,4 +210,19 @@ function extract_colors_from_themes(themes){
 var dims1 = new NodeDims();
 
 // Useful theme (Default theme colors)
-var theme1 = new NodeTheme();
+var THEME_DEFAULT = new NodeTheme();
+var THEME_BLUE_ORANGE = new NodeTheme(a="#6699FF",b="#ff9900", border="#333333");
+
+var THEME_GREEN = new NodeTheme(a="#1BDA32",b="#C1F9C8", border="#36A944");
+var THEME_ORANGE = new NodeTheme(a="#FFA41F",b="#FFE8C6", border="#DD8B16");
+var THEME_PURPLE = new NodeTheme(a="#552DCC",b="#D2C5F6", border="#30118C");
+var THEME_BLUE = new NodeTheme(a="#5888ED",b="#AFC8FF", border="#2F6AE9");
+var THEME_TANGERINE = new NodeTheme(a="#FF4C00",b="#FF9A6F", border="#E24300");
+var THEME_FUSCIA = new NodeTheme(a="#CF45D9",b="#F7B3FB", border="#CA22D5");
+
+
+
+var THEME_GREY_DARK = new NodeTheme(a="#424242",b="#848484", border="#333333");
+var THEME_GREY_MED = new NodeTheme(a="#7E7E7E",b="#D4D4D4", border="#505050");
+var THEME_GREY_LIGHT = new NodeTheme(a="#C6C6C6",b="#ECECEC", border="#7F7F7F");
+

@@ -8,7 +8,7 @@
 // themes = an array of themes, one for each node in the layer.
 // space = vertical space between nodes.
 // =============================================================================
-function LayerOfNodes(x,y, n, dims=dims1, themes=theme1, n_in=1, n_out=1, space=10){
+function LayerOfNodes(x,y, n, dims=dims1, themes=THEME_DEFAULT, n_in=1, n_out=1, space=10){
     this.x = x;
     this.y = y;
     this.n = n;
