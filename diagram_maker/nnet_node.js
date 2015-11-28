@@ -7,6 +7,7 @@
  * @param {Number} y The top left y coordinate
  * @param {Number} width_a The width of the pre-activation area
  * @param {Number} width_b The width of the post-activation area
+ *                 iff you want an input node, use -1 for width_b.
  * @param {Number} height The height of the rectangle
 
  * @param {Boolean} [fill_a = "#6699FF"] Color of the pre-activation area.
@@ -26,56 +27,96 @@ function nnet_node(ctx, x, y, width_a=60, width_b=75, height=50, fill_a, fill_b,
     fill_b = "#ff9900";
   }
 
-  mid = x + width_a
-  // ---------------------------------------------------------------------------
-  //                                                            DRAW FIRST HALF
-  // ---------------------------------------------------------------------------
-  ctx.beginPath();
-  ctx.moveTo(x + radius, y);                      // Start Just after TR corner
-  ctx.lineTo(mid, y);                             // Top Line A
+  // Handle nodes without a split
+  var homogenous = false;
+  if (width_b < 0){
+        homogenous = true;
+        width_a = width_a / 2.0;
+        width_b = width_a;
+  };
 
-  ctx.lineTo(mid, y + height);                    // Mid line
-
-  ctx.lineTo(x + radius, y + height);             // Bottom Line A
-
-  ctx.quadraticCurveTo(x, y + height, x, y + height - radius);  // BL Corner
-  ctx.lineTo(x, y + radius);                                    // Left Line
-
-  ctx.quadraticCurveTo(x, y, x + radius, y);                    // TL Corner
-  ctx.closePath();
-
-  // Fill it in with paint
-  ctx.lineWidth = stroke_size;
-  ctx.strokeStyle = stroke_col;
-  ctx.fillStyle = fill_a;
-  ctx.fill();
-  ctx.stroke();
+  // Middle of the node along x axis.
+  var mid = x + width_a
+  var end = x + width_a + width_b
 
   // ---------------------------------------------------------------------------
-  //                                                            DRAW SECOND HALF
+  //                                                                 HOMOGENOUS
   // ---------------------------------------------------------------------------
-  end = x + width_a + width_b
+  if (homogenous){
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);                      // Start Just after TR corner
+      ctx.lineTo(end - radius, y);                    // Top Line
 
-  ctx.beginPath();
-  ctx.moveTo(mid, y);                             // Start at mid
-  ctx.lineTo(end - radius, y);                    // Top Line B
+      ctx.quadraticCurveTo(end, y, end, y + radius);  // TR corner
+      ctx.lineTo(end, y + height - radius);           // Right Line
 
-  ctx.quadraticCurveTo(end, y, end, y + radius);  // TR corner
-  ctx.lineTo(end, y + height - radius);           // Right Line
+      ctx.quadraticCurveTo(end, y + height, end - radius, y + height);  // BR Corner
 
-  ctx.quadraticCurveTo(end, y + height, end - radius, y + height);  // BR Corner
-  ctx.lineTo(mid, y + height);                    // Bottom Line B
+      ctx.lineTo(x + radius, y + height);             // Bottom Line A
 
-  ctx.moveTo(mid, y);                             // Go back to mid top
-  ctx.closePath();
+      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);  // BL Corner
+      ctx.lineTo(x, y + radius);                                    // Left Line
 
-  // Fill it in with paint
-  ctx.lineWidth = stroke_size;
-  ctx.strokeStyle = stroke_col;
-  ctx.fillStyle = fill_b;
-  ctx.fill();
-  ctx.stroke();
+      ctx.quadraticCurveTo(x, y, x + radius, y);                    // TL Corner
+      ctx.closePath();
 
+      // Fill it in with paint
+      ctx.lineWidth = stroke_size;
+      ctx.strokeStyle = stroke_col;
+      ctx.fillStyle = fill_a;
+      ctx.fill();
+      ctx.stroke();
+
+  } else {
+      // -----------------------------------------------------------------------
+      //                                                         DRAW FIRST HALF
+      // -----------------------------------------------------------------------
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);                      // Start Just after TR corner
+      ctx.lineTo(mid, y);                             // Top Line A
+
+      // Go down middle section
+      ctx.lineTo(mid, y + height);                // Mid line
+
+      ctx.lineTo(x + radius, y + height);             // Bottom Line A
+
+      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);  // BL Corner
+      ctx.lineTo(x, y + radius);                                    // Left Line
+
+      ctx.quadraticCurveTo(x, y, x + radius, y);                    // TL Corner
+      ctx.closePath();
+
+      // Fill it in with paint
+      ctx.lineWidth = stroke_size;
+      ctx.strokeStyle = stroke_col;
+      ctx.fillStyle = fill_a;
+      ctx.fill();
+      ctx.stroke();
+
+      // ---------------------------------------------------------------------------
+      //                                                            DRAW SECOND HALF
+      // ---------------------------------------------------------------------------
+      ctx.beginPath();
+      ctx.moveTo(mid, y);                             // Start at mid
+      ctx.lineTo(end - radius, y);                    // Top Line B
+
+      ctx.quadraticCurveTo(end, y, end, y + radius);  // TR corner
+      ctx.lineTo(end, y + height - radius);           // Right Line
+
+      ctx.quadraticCurveTo(end, y + height, end - radius, y + height);  // BR Corner
+      ctx.lineTo(mid, y + height);                    // Bottom Line B
+
+      ctx.moveTo(mid, y);                             // Go back to mid top
+      ctx.closePath();
+
+      // Fill it in with paint
+      ctx.lineWidth = stroke_size;
+      ctx.strokeStyle = stroke_col;
+      ctx.fillStyle = fill_b;
+
+      ctx.fill();
+      ctx.stroke();
+    };
 }
 
 
