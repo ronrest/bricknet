@@ -271,6 +271,8 @@ var THEME_GREY_DARK = new NodeTheme(a="#424242",b="#848484", border="#333333", f
 var THEME_GREY_MED = new NodeTheme(a="#7E7E7E",b="#D4D4D4", border="#505050", fg_a="#FFFFFF", fg_b="#333333");
 var THEME_GREY_LIGHT = new NodeTheme(a="#C6C6C6",b="#ECECEC", border="#7F7F7F", fg_a="#FFFFFF", fg_b="#333333");
 
+var THEME_INPUT_GREY = new NodeTheme(a="#D4D4D4",b="#D4D4D4", border="#505050", fg_a="#333333", fg_b="#333333");
+
 
 
 
