@@ -182,10 +182,13 @@ function NodeDims(width_a=65, width_b=100, height=50, radius=10, border=3){
 // #############################################################################
 //                                                             NODE THEME OBJECT
 // #############################################################################
-function NodeTheme(a="#6699FF",b="#ff9900", border="#333333"){
+function NodeTheme(a="#6699FF",b="#ff9900", border="#333333", fg_a="#FFFFFF", fg_b="#000000"){
     this.a = a; //  Color of the pre-activation area.
     this.b = b; //  Color of the post-activation area.
     this.border= border;
+    this.fg_a = fg_a; // Foreground Color for pre-activation area.
+    this.fg_b = fg_b; // Foreground COlor for post-activation area
+
 }
 
 
