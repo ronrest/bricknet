@@ -1,10 +1,10 @@
 
 
 // Function for drawing bezier curve between two points
-function bez(context, x, y, x2, y2, size=3, d=50){
-//      var canvas = document.getElementById('myCanvas');
-//      var context = canvas.getContext('2d');
-
+// d = How far the control point should stick out relative to the starting
+//     position.
+// d2 = as per d, but relative to the end point.
+function bez(context, x, y, x2, y2, size=3, color="#333333", d=50, d2=50){
       var ct1_x = x + d;
       var ct1_y = y;
       var ct2_x = x2 - d2;
@@ -17,6 +17,7 @@ function bez(context, x, y, x2, y2, size=3, d=50){
       context.lineWidth = size;
 
       // line color
-      context.strokeStyle = 'black';
+      context.strokeStyle = color;
       context.stroke();
       }
+
