@@ -133,8 +133,11 @@ function layer_nodes_y(n, height, space, y=0){
 //   Use "LLL" for elements you want to replace with layer number
 //       "III" for elements you want to replace with node index of current layer
 // latex_b = text to use on post-activation area of nodes
+// shift = if you want the indices on the displayet text to start from 1, then
+//         shift by 1.
+//         if you want the indices to start from 0, then shift by 0
 // =============================================================================
-function draw_layer_text(context, layer, layer_num, latex_a="", latex_b="", size=12){
+function draw_layer_text(context, layer, layer_num, latex_a="", latex_b="", size=12, shift=1){
     var font_size = size;
     var latex = "";
     for (var i = 0; i < layer.n; i++){
@@ -144,7 +147,7 @@ function draw_layer_text(context, layer, layer_num, latex_a="", latex_b="", size
             // Prepare preactivation latex
             // -----------------------------------------------------------------
             //var latex_a = "z_{III}^{(LLL)}";
-            latex = latex.replace(/III/g, i);
+            latex = latex.replace(/III/g, i+shift);
             latex = latex.replace(/LLL/g, layer_num);
 
             // -----------------------------------------------------------------
@@ -161,7 +164,7 @@ function draw_layer_text(context, layer, layer_num, latex_a="", latex_b="", size
             // Prepare post-activation latex
             // -----------------------------------------------------------------
             //var latex_b = "a_{III}^{(LLL)}=g(z_{III}^{(LLL)})";
-            latex = latex.replace(/III/g, i);
+            latex = latex.replace(/III/g, i+shift);
             latex = latex.replace(/LLL/g, layer_num);
 
             // -----------------------------------------------------------------
