@@ -226,3 +226,26 @@ var THEME_GREY_DARK = new NodeTheme(a="#424242",b="#848484", border="#333333");
 var THEME_GREY_MED = new NodeTheme(a="#7E7E7E",b="#D4D4D4", border="#505050");
 var THEME_GREY_LIGHT = new NodeTheme(a="#C6C6C6",b="#ECECEC", border="#7F7F7F");
 
+
+
+
+
+// #############################################################################
+//                                                                IMAGE FROM URL
+// #############################################################################
+// This code is taken from:
+// http://www.html5canvastutorials.com/advanced/html5-canvas-load-image-data-url
+//
+// url = where the image resides
+// x = x position to place the image on the canvas
+// y = y position to place the image on the canvas
+// =============================================================================
+function imageFromUrl(context, url, x, y) {
+        // load image from data url
+        var imageObj = new Image();
+        imageObj.src = url;
+
+        imageObj.onload = function() {
+          context.drawImage(this, x, y);
+        };
+}
