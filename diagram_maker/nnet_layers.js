@@ -120,3 +120,56 @@ function layer_nodes_y(n, height, space, y=0){
 //        start_y =
 //    }
 //}
+
+
+
+
+// #############################################################################
+//                                                               DRAW LAYER TEXT
+// #############################################################################
+// layer = layer object
+// layer_num = layer number
+// latex_a = text to use on preactivation area of nodes
+//   Use "LLL" for elements you want to replace with layer number
+//       "III" for elements you want to replace with node index of current layer
+// latex_b = text to use on post-activation area of nodes
+// =============================================================================
+function draw_layer_text(context, layer, layer_num, latex_a="", latex_b="", size=12){
+    var font_size = size;
+    var latex = "";
+    for (var i = 0; i < layer.n; i++){
+        if (latex_a != ""){
+            latex = latex_a;
+            // -----------------------------------------------------------------
+            // Prepare preactivation latex
+            // -----------------------------------------------------------------
+            //var latex_a = "z_{III}^{(LLL)}";
+            latex = latex.replace(/III/g, i);
+            latex = latex.replace(/LLL/g, layer_num);
+
+            // -----------------------------------------------------------------
+            // Draw preactivation latex
+            // -----------------------------------------------------------------
+            var x_pos = layer.nodes[i].x + 10;
+            var y_pos = layer.nodes[i].y + layer.nodes[i].dims.height - layer.nodes[i].dims.radius - 1.5* font_size;
+            latexOnCanvas(context, latex, x_pos, y_pos, color=layer.nodes[i].theme.fg_a, size=font_size);
+        };
+
+        if (latex_b != ""){
+            latex = latex_b;
+            // -----------------------------------------------------------------
+            // Prepare post-activation latex
+            // -----------------------------------------------------------------
+            //var latex_b = "a_{III}^{(LLL)}=g(z_{III}^{(LLL)})";
+            latex = latex.replace(/III/g, i);
+            latex = latex.replace(/LLL/g, layer_num);
+
+            // -----------------------------------------------------------------
+            // Draw post-activation latex
+            // -----------------------------------------------------------------
+            x_pos = layer.nodes[i].mid_x + 10;
+            y_pos = layer.nodes[i].y + layer.nodes[i].dims.height - layer.nodes[i].dims.radius - 1.5* font_size;
+            latexOnCanvas(context, latex, x_pos, y_pos, color=layer.nodes[i].theme.fg_b, size=font_size);
+        }
+    }
+}
