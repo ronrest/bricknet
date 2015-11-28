@@ -37,6 +37,50 @@ function LayerOfNodes(x,y, n, dims=dims1, themes=theme1, n_in=1, n_out=1, space=
             this.nodes[i].draw(ctx);
         }
     }
+
+    // =========================================================================
+    //                                                     FORWARD_CONNECTIONS()
+    // =========================================================================
+    // colors = If a string is used. All connections will be same color.
+    //          If an array is used, it should be same size as the number of
+    //          elements in target layer, representing colors for each cluster
+    //          of lines connecting to each target node.
+    //
+    // size = thickness of the connection lines
+    // d = How far the control point should stick out relative to the starting
+    //     position.
+    // d2 = as per d, but relative to the end point.
+    //
+    // use_wa = Use evenly distributed weight connections along the side face of
+    //          the starting node?
+    // use_wb = Use evenly distributed weight connections along the side face of
+    //          the target node?
+    //
+    this.forward_connections = function (ctx, next_layer, colors, size=3, d=100, d2=100, use_wa=false, use_wb=false){
+        // TODO: handle colors
+
+
+        // handle position of nodes along side face of each node
+        var wa = -1;
+        var wb = -1;
+
+        for (var i = 0; i < next_layer.n; i++){
+            to_node = next_layer.nodes[i];
+            for (var j = 0; j < n1; j++){
+                from_node = l1.nodes[j]
+
+                // handle psoition along side edges the nodes
+                if (use_wa){wa = i}; // Index of connection on edge of from_node
+                if (use_wb){wb = j}; // Index of connection on edge of to_node
+
+                from_node.connect_to(ctx, to_node, wa=wa, wb=wb, color=to_node.theme.border ,size, d, d2);
+            }
+        }
+
+    }
+
+
+
 }
 
 
