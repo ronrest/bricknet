@@ -100,9 +100,9 @@ function Node(x,y, dims=dims1, theme=theme1, n_in=1, n_out=1){
     this.out_wx = this.end_x - this.dims.radius;
     this.out_wy = y_connection_offsets(n_out, this.dims.height, y=this.y);
 
-
-
-    //Method
+    // =========================================================================
+    //                                                                    DRAW()
+    // =========================================================================
     this.draw = function (ctx) {
         nnet_node(ctx, this.x, this.y, this.dims.width_a, this.dims.width_b, this.dims.height, this.theme.a, this.theme.b, this.theme.border, this.dims.border, this.dims.radius);
     }
