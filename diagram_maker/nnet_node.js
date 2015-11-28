@@ -262,7 +262,7 @@ var THEME_GREEN = new NodeTheme(a="#28AE38",b="#C1F9C8", border="#009412", fg_a=
 var THEME_ORANGE = new NodeTheme(a="#FFA41F",b="#FFE8C6", border="#DD8B16", fg_a="#FFFFFF", fg_b="#813805");
 var THEME_PURPLE = new NodeTheme(a="#552DCC",b="#D2C5F6", border="#30118C", fg_a="#FFFFFF", fg_b="#1E0469");
 var THEME_BLUE = new NodeTheme(a="#5888ED",b="#AFC8FF", border="#2F6AE9", fg_a="#FFFFFF", fg_b="#021D54");
-var THEME_TANGERINE = new NodeTheme(a="#FF4C00",b="#FF9A6F", border="#E24300", fg_a="#FFFFFF", fg_b="#C05122");
+var THEME_TANGERINE = new NodeTheme(a="#FF4C00",b="#FF9A6F", border="#E24300", fg_a="#FFFFFF", fg_b="#3D1200");
 var THEME_FUSCIA = new NodeTheme(a="#CF45D9",b="#F7B3FB", border="#CA22D5", fg_a="#FFFFFF", fg_b="#690B70");
 
 
