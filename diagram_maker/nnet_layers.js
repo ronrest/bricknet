@@ -140,18 +140,21 @@ function layer_nodes_y(n, height, space, y=0){
 function draw_layer_text(context, layer, layer_num, latex_a="", latex_b="", size=12, shift=1){
     var font_size = size;
     var latex = "";
+    // -------------------------------------------------------------------------
+    //                    For each node in the layer, add the desired text to it
+    // -------------------------------------------------------------------------
     for (var i = 0; i < layer.n; i++){
         if (latex_a != ""){
             latex = latex_a;
             // -----------------------------------------------------------------
-            // Prepare preactivation latex
+            //                                       Prepare preactivation latex
             // -----------------------------------------------------------------
             //var latex_a = "z_{III}^{(LLL)}";
             latex = latex.replace(/III/g, i+shift);
             latex = latex.replace(/LLL/g, layer_num);
 
             // -----------------------------------------------------------------
-            // Draw preactivation latex
+            //                                          Draw preactivation latex
             // -----------------------------------------------------------------
             var x_pos = layer.nodes[i].x + 10;
             var y_pos = layer.nodes[i].y + layer.nodes[i].dims.height - layer.nodes[i].dims.radius - 1.5* font_size;
@@ -161,14 +164,14 @@ function draw_layer_text(context, layer, layer_num, latex_a="", latex_b="", size
         if (latex_b != ""){
             latex = latex_b;
             // -----------------------------------------------------------------
-            // Prepare post-activation latex
+            //                                     Prepare post-activation latex
             // -----------------------------------------------------------------
             //var latex_b = "a_{III}^{(LLL)}=g(z_{III}^{(LLL)})";
             latex = latex.replace(/III/g, i+shift);
             latex = latex.replace(/LLL/g, layer_num);
 
             // -----------------------------------------------------------------
-            // Draw post-activation latex
+            //                                        Draw post-activation latex
             // -----------------------------------------------------------------
             x_pos = layer.nodes[i].mid_x + 10;
             y_pos = layer.nodes[i].y + layer.nodes[i].dims.height - layer.nodes[i].dims.radius - 1.5* font_size;
