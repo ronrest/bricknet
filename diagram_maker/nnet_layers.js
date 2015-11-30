@@ -80,6 +80,10 @@ function LayerOfNodes(x,y, n, dims=dims1, themes=THEME_DEFAULT, n_in=1, n_out=1,
 
         for (var i = 0; i < next_layer.n; i++){
             to_node = next_layer.nodes[i];
+
+            // Do not make connections to a bias node.
+            if (to_node.is_bias){continue;};
+
             for (var j = 0; j < this.n; j++){
                 from_node = this.nodes[j]
 
