@@ -123,11 +123,13 @@ function draw_node(ctx, x, y, width_a=60, width_b=75, height=50, fill_a, fill_b,
 // #############################################################################
 //                                                                   NODE OBJECT
 // #############################################################################
-function Node(x,y, dims=dims1, theme=THEME_DEFAULT, n_in=1, n_out=1){
+// bias = {boolean} is this node a bias node?
+function Node(x,y, dims=dims1, theme=THEME_DEFAULT, n_in=1, n_out=1, bias=false){
     this.x = x;
     this.y = y;
     this.dims = dims;
     this.theme = theme;
+    this.is_bias = bias;
 
     // Outer Points of interest
     this.mid_x = this.x + this.dims.width_a;
