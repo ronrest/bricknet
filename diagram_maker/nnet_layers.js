@@ -7,14 +7,16 @@
 // dims = a dimension object
 // themes = an array of themes, one for each node in the layer.
 // space = vertical space between nodes.
+// bias = {boolean} should it include a bias node?
 // =============================================================================
-function LayerOfNodes(x,y, n, dims=dims1, themes=THEME_DEFAULT, n_in=1, n_out=1, space=10){
+function LayerOfNodes(x,y, n, dims=dims1, themes=THEME_DEFAULT, n_in=1, n_out=1, space=10, bias=false){
     this.x = x;
     this.y = y;
     this.n = n;
     this.dims = dims;
     this.themes = themes;
     this.space = space;  // Vertical Space between nodes.
+    this.has_bias = bias; // has the layer got a bias node?
 
     // If the themes passed in is not an array of themes, then it creates
     // an array populating it with the same theme.
@@ -27,8 +29,14 @@ function LayerOfNodes(x,y, n, dims=dims1, themes=THEME_DEFAULT, n_in=1, n_out=1,
 
     // CREATE NODES
     this.nodes = new Array(n);
+    var is_bias_node = false;               // handle bias nodes
     for (i = 0; i < this.n; i++) {
-        this.nodes[i] = new Node(x, layer_ys[i], dims=this.dims, theme=this.themes[i], n_in, n_out);
+        if (i == 0){
+            is_bias_node = this.has_bias;
+        } else {
+            is_bias_node = false;
+        }
+        this.nodes[i] = new Node(x, layer_ys[i], dims=this.dims, theme=this.themes[i], n_in, n_out, bias=is_bias_node);
     }
 
     // DRAW METHOD
