@@ -153,7 +153,12 @@ function draw_layer_text(context, layer, layer_num, latex_a="", latex_b="", size
     //                    For each node in the layer, add the desired text to it
     // -------------------------------------------------------------------------
     for (var i = 0; i < layer.n; i++){
-        if (latex_a != ""){
+        if (layer.nodes[i].is_bias){
+            // -----------------------------------------------------------------
+            //                                       Draw a +1 on the bias node.
+            // -----------------------------------------------------------------
+            latexOnCanvas(context, "+1", x_pos, y_pos, color=layer.nodes[i].theme.fg_a, size=font_size);
+        } else if (latex_a != ""){
             latex = latex_a;
             // -----------------------------------------------------------------
             //                                       Prepare preactivation latex
