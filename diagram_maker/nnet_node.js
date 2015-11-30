@@ -16,7 +16,7 @@
  * @param {Boolean} [stroke_size = 3] Width of the line to use for the border.
  * @param {Number} [radius = 10] The radius of the corners;
  */
-function nnet_node(ctx, x, y, width_a=60, width_b=75, height=50, fill_a, fill_b, stroke_col, stroke_size=5, radius=15) {
+function draw_node(ctx, x, y, width_a=60, width_b=75, height=50, fill_a, fill_b, stroke_col, stroke_size=5, radius=15) {
   if (typeof stroke_col === 'undefined') {
     stroke_col= "#333333";
   }
@@ -145,7 +145,7 @@ function Node(x,y, dims=dims1, theme=THEME_DEFAULT, n_in=1, n_out=1){
     //                                                                    DRAW()
     // =========================================================================
     this.draw = function (ctx) {
-        nnet_node(ctx, this.x, this.y, this.dims.width_a, this.dims.width_b, this.dims.height, this.theme.a, this.theme.b, this.theme.border, this.dims.border, this.dims.radius);
+        draw_node(ctx, this.x, this.y, this.dims.width_a, this.dims.width_b, this.dims.height, this.theme.a, this.theme.b, this.theme.border, this.dims.border, this.dims.radius);
     }
 
     // =========================================================================
