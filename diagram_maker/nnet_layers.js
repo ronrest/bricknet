@@ -140,6 +140,15 @@ function layer_nodes_y(n, height, space, y=0){
 function draw_layer_text(context, layer, layer_num, latex_a="", latex_b="", size=12, shift=1){
     var font_size = size;
     var latex = "";
+
+    // -------------------------------------------------------------------------
+    //                                                Declare position variables
+    // -------------------------------------------------------------------------
+    var x_offset = 10;
+    var y_offset = layer.nodes[0].dims.height - layer.nodes[0].dims.radius - 1.5* font_size;
+    var x_pos = layer.nodes[0].x + x_offset;
+    var y_pos = layer.nodes[0].y + y_offset;
+
     // -------------------------------------------------------------------------
     //                    For each node in the layer, add the desired text to it
     // -------------------------------------------------------------------------
@@ -156,8 +165,8 @@ function draw_layer_text(context, layer, layer_num, latex_a="", latex_b="", size
             // -----------------------------------------------------------------
             //                                          Draw preactivation latex
             // -----------------------------------------------------------------
-            var x_pos = layer.nodes[i].x + 10;
-            var y_pos = layer.nodes[i].y + layer.nodes[i].dims.height - layer.nodes[i].dims.radius - 1.5* font_size;
+            x_pos = layer.nodes[i].x + x_offset;
+            y_pos = layer.nodes[i].y + y_offset;
             latexOnCanvas(context, latex, x_pos, y_pos, color=layer.nodes[i].theme.fg_a, size=font_size);
         };
 
@@ -173,8 +182,8 @@ function draw_layer_text(context, layer, layer_num, latex_a="", latex_b="", size
             // -----------------------------------------------------------------
             //                                        Draw post-activation latex
             // -----------------------------------------------------------------
-            x_pos = layer.nodes[i].mid_x + 10;
-            y_pos = layer.nodes[i].y + layer.nodes[i].dims.height - layer.nodes[i].dims.radius - 1.5* font_size;
+            x_pos = layer.nodes[i].mid_x + x_offset;
+            y_pos = layer.nodes[i].y + y_offset;
             latexOnCanvas(context, latex, x_pos, y_pos, color=layer.nodes[i].theme.fg_b, size=font_size);
         }
     }
