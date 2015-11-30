@@ -108,22 +108,6 @@ function layer_nodes_y(n, height, space, y=0){
 }
 
 
-
-
-
-// Get the starting y values for two subsequent layers
-// y position for the whole thing
-// na = number of nodes in layer a
-// nb = number of nodes in layer b
-//function get_start_ys(y, na, nb, spacing){
-//    if (na > nb){
-//        start_y =
-//    }
-//}
-
-
-
-
 // #############################################################################
 //                                                               DRAW LAYER TEXT
 // #############################################################################
