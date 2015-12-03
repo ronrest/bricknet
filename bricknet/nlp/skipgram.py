@@ -54,3 +54,33 @@ def most_likely_output_words(in_word, in_df, out_df, n=10):
     out_probabilities.sort(ascending=False)
     out_probabilities.head(n)
 
+
+# ==============================================================================
+#                                                                         DELTAS
+# ==============================================================================
+def deltas(sentence, c):
+    """
+    sentence = string of just one single sentence.
+    c = number of words to either side of center word to use for window context.
+
+    """
+    sum_grads_U = 0     # Sum of gradients for the output vectors
+    sum_grads_V = 0     # Sum of gradients for the input vectors
+
+    words = sentence.split()
+    num_words = len(words)
+
+    # Add Start and end of sentence tokens
+    words = c*["START"] + words + ["END"]* c
+
+    # for each word in the sentence, (skipping start of sentence tokens).
+    for w in range(c, num_words+c):
+        window_indexes = range(w-c, w) + range(w+1, w+c+1)
+        center_word = words[w]
+        print center_word
+
+        for out_index in window_indexes:
+            out_word = words[out_index]
+            sum_grads_U += grad_output_vectors()
+            sum_grads_V += grad_input_vectors()
+
