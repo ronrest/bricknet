@@ -36,3 +36,21 @@ def prob_word_pair(in_word, out_word, in_df, out_df):
 
     return numerator / denominator
 
+
+# ==============================================================================
+#                                                       MOST_LIKELY_OUTPUT_WORDS
+# ==============================================================================
+def most_likely_output_words(in_word, in_df, out_df, n=10):
+    """
+    Given some input word, what are the top-n most likely set of output words.
+
+    in_word = string
+    in_df = dataframe of the input word
+    out_df = dataframe of the output word
+    """
+    in_vec = in_df.loc[in_word]
+    dot_products = np.exp(out_df.dot(in_vec))
+    out_probabilities = dot_products / dot_products.sum()
+    out_probabilities.sort(ascending=False)
+    out_probabilities.head(n)
+
