@@ -97,6 +97,7 @@ def grad_output_vectors(in_word, out_word, in_df, out_df):
     return in_vec - sum_probs
 
 
+# ==============================================================================
 #                                                                 PROB_WORD_PAIR
 # ==============================================================================
 def prob_word_pair(in_word, out_word, in_df, out_df):
