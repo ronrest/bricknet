@@ -173,3 +173,32 @@ def deltas(sentence, c, in_df, out_df):
 
     return [sum_grads_V/num_words , sum_grads_U/num_words ]
 
+# ==============================================================================
+#                                                          GET_VOCAB_FROM_STRING
+# ==============================================================================
+def get_vocab_from_string(s):
+    """
+    Creates a set of words from a string as the corpus.
+
+    :param s: {string}
+
+        The string to use as a corpus.
+
+    :return: {set}
+
+        A set of all the unique words in the corpus string.
+
+    """
+    # TODO: use a real word tokenisation function.
+    words = set(s.split())
+
+    # Clean up words
+    words = {word.replace(".", "") for word in words}       # remove full stops
+    words = {word.replace(",", "") for word in words}       # remove commas
+    words = {word.replace("?", "") for word in words}       # remove q marks
+    words = {word.replace("!", "") for word in words}       # remove exclamations
+    words = {word.replace(";", "") for word in words}       # remove semicolons
+    words = {word.lower() for word in words}                # to lower case
+
+    return words
+
