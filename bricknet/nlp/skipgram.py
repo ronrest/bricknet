@@ -202,7 +202,25 @@ def get_vocab_from_string(s):
 
     return words
 
+
+# ==============================================================================
+#                                                                 WORD_VECTOR_DF
+# ==============================================================================
 def word_vector_df(vocab, vec_size = 20):
+    """
+    Creates a dataframe of word vectors from a list or set of words as the vocab.
+
+    :param vocab: {set, or list}
+
+        A list of all the unique words.
+
+    :param vec_size: {int}
+
+        The size of the vector to use as the word vectors.
+
+    :return: {datagrame}
+
+    """
     # initialise the word vectors to random values
     df = np.random.rand(len(vocab), vec_size)
     df = pd.DataFrame(df, index=vocab)
