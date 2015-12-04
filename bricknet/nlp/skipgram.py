@@ -144,7 +144,7 @@ def most_likely_output_words(in_word, in_df, out_df, n=10):
 # ==============================================================================
 #                                                                         DELTAS
 # ==============================================================================
-def deltas(sentence, c):
+def deltas(sentence, c, in_df, out_df):
     """
     sentence = string of just one single sentence.
     c = number of words to either side of center word to use for window context.
