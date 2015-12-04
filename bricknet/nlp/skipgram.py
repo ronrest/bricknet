@@ -221,6 +221,7 @@ def word_vector_df(vocab, vec_size = 20):
     :return: {datagrame}
 
     """
+    # TODO: check the datatype of vocab, typecaset to set to be safe.
     # initialise the word vectors to random values
     df = np.random.rand(len(vocab), vec_size)
     df = pd.DataFrame(df, index=vocab)
