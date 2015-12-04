@@ -45,6 +45,8 @@ def grad_input_vectors(in_word, out_word, in_df, out_df):
     out_vec = out_df.loc[out_word]
     vocab_size = out_df.shape[0]
 
+    # TODO: come up with a vectorised implementation if possible. Too slow with
+    #       a for loop
     sum_probs = 0       # stores the cumulative sum SUM(p(j|c) * U_j)
     for j in range(vocab_size):
         jth_output_word = out_df.index[j]
