@@ -163,7 +163,7 @@ def deltas(sentence, c):
     for w in range(c, num_words+c):
         window_indexes = range(w-c, w) + range(w+1, w+c+1)
         center_word = words[w]
-        print center_word
+        #print center_word
 
         for out_index in window_indexes:
             out_word = words[out_index]
