@@ -202,3 +202,8 @@ def get_vocab_from_string(s):
 
     return words
 
+def word_vector_df(vocab, vec_size = 20):
+    # initialise the word vectors to random values
+    df = np.random.rand(len(vocab), vec_size)
+    df = pd.DataFrame(df, index=vocab)
+    return df
