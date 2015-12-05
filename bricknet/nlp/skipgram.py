@@ -96,9 +96,16 @@ def prob_word_pair(in_word, out_word, in_df, out_df):
     out_vec = out_df.loc[out_word]
 
     numerator = np.exp(out_vec.dot(in_vec))
-    denominator = (np.exp(out_df.dot(in_vec))).sum()
 
-    return numerator / denominator
+    if cached_denominator is None:
+        denominator = (np.exp(out_df.dot(in_vec))).sum()
+        return numerator / denominator
+    else:
+        return numerator / cached_denominator
+
+
+
+
 
 
 # ==============================================================================
