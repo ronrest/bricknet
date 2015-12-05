@@ -66,6 +66,12 @@ def grad_output_vectors(in_word, out_word, in_df, out_df):
     return (in_vec - np.outer((expinout / expinout.sum()), in_vec).sum(0))
 
 
+# ==============================================================================
+#                                                         SG_SOFTMAX_DENOMINATOR
+# ==============================================================================
+def sg_softmax_denominator(in_word, in_df, out_df):
+    in_vec = in_df.loc[in_word]
+    return (np.exp(out_df.dot(in_vec))).sum()
 
 
 # ==============================================================================
