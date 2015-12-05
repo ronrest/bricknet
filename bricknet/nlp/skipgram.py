@@ -170,9 +170,11 @@ def deltas(sentence, c, in_df, out_df):
 
         for out_index in window_indexes:
             out_word = words[out_index]
+            out_vec = out_df.loc[out_word]
+
             #print "     "+ out_word
-            sum_grads_U += grad_output_vectors(center_word, out_word, in_df, out_df, expinout)
-            sum_grads_V += grad_input_vectors(center_word, out_word, in_df, out_df, expinout)
+            sum_grads_U += grad_output_vectors(in_vec, out_vec, in_df, out_df, expinout)
+            sum_grads_V += grad_input_vectors(in_vec, out_vec, in_df, out_df, expinout)
 
     return [sum_grads_V/num_words , sum_grads_U/num_words ]
 
