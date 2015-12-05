@@ -162,13 +162,19 @@ def deltas(sentence, c, in_df, out_df):
     for w in range(c, num_words+c):
         window_indexes = range(w-c, w) + range(w+1, w+c+1)
         center_word = words[w]
-        #print center_word
+        in_vec = in_df.loc[center_word]
+
+        # Cache the calculation of exponent of dot product of all output vectors
+        # with input vector since it is shared between all output words within
+        # a window around a given center word. Avoids calculating the same
+        # expensive calculations over and over.
+        expinout = np.exp(out_df.dot(in_vec))
 
         for out_index in window_indexes:
             out_word = words[out_index]
             #print "     "+ out_word
-            sum_grads_U += grad_output_vectors(center_word, out_word, in_df, out_df)
-            sum_grads_V += grad_input_vectors(center_word, out_word, in_df, out_df)
+            sum_grads_U += grad_output_vectors(center_word, out_word, in_df, out_df, expinout)
+            sum_grads_V += grad_input_vectors(center_word, out_word, in_df, out_df, expinout)
 
     return [sum_grads_V/num_words , sum_grads_U/num_words ]
 
