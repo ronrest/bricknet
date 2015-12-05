@@ -26,34 +26,17 @@ def grad_input_vectors(in_word, out_word, in_df, out_df):
         dataframe of the output word
     :return:
     """
-
-    # in_vec = in_df.loc[in_word]
-    # out_vec = out_df.loc[out_word]
-    # vocab_size = out_df.shape[0]
-    #
-    # # all the probabilities of all out words, with the with in_word.
-    # all_out_combinations = most_likely_output_words(in_word, in_df, out_df, n=vocab_size)
-    # #TODO: somehow times that with U_j for each word j.
-    #
-    # out_vec - sum_out_combinations*
-    #
-    # numerator = np.exp(out_vec.dot(in_vec))
-    # denominator = (np.exp(out_df.dot(in_vec))).sum()
-
-    # Naive unoptimised version
     in_vec = in_df.loc[in_word]
     out_vec = out_df.loc[out_word]
-    vocab_size = out_df.shape[0]
 
-    # TODO: come up with a vectorised implementation if possible. Too slow with
-    #       a for loop
-    sum_probs = 0       # stores the cumulative sum SUM(p(j|c) * U_j)
-    for j in range(vocab_size):
-        jth_output_word = out_df.index[j]
-        jth_output_vector = out_df.iloc[j]
-        sum_probs += prob_word_pair(in_word, jth_output_word, in_df, out_df) * jth_output_vector
+    # TODO: cache the expinout for each window so you dont have to calculate
+    #       for every output word in the window.
+    #       Also to share it between the grad_input and grad_output
+    # The exponent of the dot product of all the output vectors with the input vector.
+    # $e^(U_j \cdot V_c)$  for all j in vocabulary
+    expinout = np.exp(out_df.dot(in_vec))
+    return (out_vec - (out_df.multiply(expinout/expinout.sum(), axis=0)).sum())
 
-    return out_vec - sum_probs
 
 
 # ==============================================================================
