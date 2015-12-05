@@ -13,7 +13,7 @@ np = pd.np
 # ==============================================================================
 #                                                             GRAD_INPUT_VECTORS
 # ==============================================================================
-def grad_input_vectors(in_word, out_word, in_df, out_df):
+def grad_input_vectors(in_word, out_word, in_df, out_df, expinout=None):
     """
     calculates the dderivative of the log probabilities of the for the word pair
     relative to the input word.
@@ -24,6 +24,11 @@ def grad_input_vectors(in_word, out_word, in_df, out_df):
         dataframe of the input words
     :param out_df:
         dataframe of the output word
+    :param expinout: {}(defualt= None)
+
+        cached calculation of exponent of dot product of all output vectors with
+        input vector
+
     :return:
     """
     in_vec = in_df.loc[in_word]
@@ -34,7 +39,9 @@ def grad_input_vectors(in_word, out_word, in_df, out_df):
     #       Also to share it between the grad_input and grad_output
     # The exponent of the dot product of all the output vectors with the input vector.
     # $e^(U_j \cdot V_c)$  for all j in vocabulary
-    expinout = np.exp(out_df.dot(in_vec))
+    if expinout is None:
+        expinout = np.exp(out_df.dot(in_vec))
+
     return (out_vec - (out_df.multiply(expinout/expinout.sum(), axis=0)).sum())
 
 
