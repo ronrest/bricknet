@@ -77,7 +77,7 @@ def sg_softmax_denominator(in_word, in_df, out_df):
 # ==============================================================================
 #                                                                 PROB_WORD_PAIR
 # ==============================================================================
-def prob_word_pair(in_word, out_word, in_df, out_df):
+def prob_word_pair(in_word, out_word, in_df, out_df, cached_denominator=None):
     """
 
     Using softmax probabilities
