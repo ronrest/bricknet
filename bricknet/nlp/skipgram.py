@@ -13,13 +13,13 @@ np = pd.np
 # ==============================================================================
 #                                                             GRAD_INPUT_VECTORS
 # ==============================================================================
-def grad_input_vectors(in_word, out_word, in_df, out_df, expinout=None):
+def grad_input_vectors(in_vec, out_vec, in_df, out_df, expinout=None):
     """
     calculates the dderivative of the log probabilities of the for the word pair
     relative to the input word.
 
-    :param in_word: {string}
-    :param out_word:{string}
+    :param in_vec: {Series}
+    :param out_vec:{Series}
     :param in_df:
         dataframe of the input words
     :param out_df:
@@ -31,8 +31,6 @@ def grad_input_vectors(in_word, out_word, in_df, out_df, expinout=None):
 
     :return:
     """
-    in_vec = in_df.loc[in_word]
-    out_vec = out_df.loc[out_word]
 
     # TODO: cache the expinout for each window so you dont have to calculate
     #       for every output word in the window.
