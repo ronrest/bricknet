@@ -231,3 +231,64 @@ def word_vector_df(vocab, vec_size = 20):
     df = np.random.rand(len(vocab), vec_size)
     df = pd.DataFrame(df, index=vocab)
     return df
+
+def trainB(iterations, alpha=0.01):
+    window_dims = [4,4]  # Number of words on either side of the center word
+    c_left  = window_dims[0]    # Number of context words to the left of center word
+    c_right = window_dims[1]    # Number of context words to the right of center word
+
+    #sentence = "the one and the only jones the magnificent"
+    for i in np.random.randint(low=0, high=len(sentences), size=iterations):
+        sentence_list = sentences[i].split()
+        #sentence_list = sentence.split()
+
+        # Add Start and end of sentence tokens
+        sentence_list = c_left * ["START"] + sentence_list + ["END"] * c_right
+
+        # Select a random word in the sentence to be the center word
+        center_word_index = np.random.randint(low=c_left,
+                                              high=len(sentence_list) - c_right,
+                                              size=1)
+
+        #center_word_index = 5
+        center_word = sentence_list[center_word_index]
+        context = sentence_list[center_word_index - c_left: center_word_index]
+        context += sentence_list[center_word_index +1 : center_word_index + c_right +1]
+
+        window_words = set(context)
+        window_df = out_df.loc[window_words]
+
+        # Dataframe for each of the words in the window, to store gradients of the
+        # output vectors
+        G_out = np.zeros(shape=[len(window_words), out_df.shape[1]])
+        G_out = pd.DataFrame(G_out, index=window_words)
+
+        # Gradients for the input vector.
+        G_in = pd.Series(np.zeros(in_df.shape[1]))
+
+        # The input word for the current window
+        in_vec = in_df.loc[center_word]
+
+        # Cache the calculation of exponent of dot product of all output vectors
+        # with input vector since it is shared between all output words within
+        # a window around a given center word. Avoids calculating the same
+        # expensive calculations over and over.
+        expinout = np.exp(out_df.dot(in_vec))
+
+        for out_word in context:
+            out_vec = out_df.loc[out_word] # vector for current output word
+
+            # TODO: gradient wrt outputs does not change based on output, it
+            #       changes based on input vec. So we could make it more
+            #       coputationally efficiant by not recalculating it for
+            #       every output word in the window.
+            gout = grad_output_vectors(in_vec, out_vec, in_df, out_df, expinout)
+            G_out.loc[out_word] += gout
+
+            gin = grad_input_vectors(in_vec, out_vec, in_df, out_df, expinout)
+            G_in  += gin
+
+        # Update the original output word vectors
+        out_df.loc[window_words] += alpha * G_out
+        in_df.loc[center_word] +=  alpha * G_in
+
