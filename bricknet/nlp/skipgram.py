@@ -127,9 +127,16 @@ def most_likely_output_words(in_word, in_df, out_df, n=10):
     """
     Given some input word, what are the top-n most likely set of output words.
 
-    in_word = string
-    in_df = dataframe of the input word
-    out_df = dataframe of the output word
+    :param in_word: {string}
+    :param in_df: {dataframe}
+
+        dataframe of the input word
+
+    :param out_df:
+
+        dataframe of the output word
+    :param n:
+    :return:
     """
     in_vec = in_df.loc[in_word]
     dot_products = np.exp(out_df.dot(in_vec))
