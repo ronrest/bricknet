@@ -71,3 +71,16 @@ def calc_preactivations_output_layer(a):
     """
     return out_df.dot(a)
 
+
+# ==============================================================================
+#                                                                CALC_HYPOTHESES
+# ==============================================================================
+def calc_hypotheses(z):
+    """
+
+    :param z: the preactivations of the output layer
+    :return:
+    """
+    exp_z = np.exp(z)
+    return exp_z / exp_z.sum()
+
