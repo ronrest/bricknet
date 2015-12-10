@@ -59,3 +59,15 @@ def calc_hidden_layer(words):
     in_vecs = in_df[words]  # Input word vectors
     return in_vecs.sum(axis=1) / num_input_words       # Hidden layer.
 
+
+# ==============================================================================
+#                                               CALC_PREACTIVATIONS_OUTPUT_LAYER
+# ==============================================================================
+def calc_preactivations_output_layer(a):
+    """
+
+    :param a: the hidden layer node values
+    :return:
+    """
+    return out_df.dot(a)
+
