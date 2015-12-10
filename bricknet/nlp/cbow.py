@@ -84,3 +84,29 @@ def calc_hypotheses(z):
     exp_z = np.exp(z)
     return exp_z / exp_z.sum()
 
+
+# ==============================================================================
+#                                                             TRAIN_ONE_EXAMPLE
+# ==============================================================================
+def train_one_example(context, output, alpha=0.01):
+    words = context
+    correct_output = output
+
+    # FOrward propagation
+    a = calc_hidden_layer(words)
+    z = calc_preactivations_output_layer(a)
+    h = calc_hypotheses(z)
+
+    # Back propagation
+    G_z = h.copy()
+    G_z[correct_output]  -= 1
+    G_a = out_df.transpose().dot(G_z)
+    G_W_out = np.outer(G_z, a)
+
+
+    # update the out word matrix
+    out_df += -alpha * G_W_out
+
+    # Update teh input word matrix
+    inputs_update = -(1.0/len(words)) * alpha * G_a
+    in_df[words] = in_df[words].add(inputs_update, axis="rows")
