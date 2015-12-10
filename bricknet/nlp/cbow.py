@@ -45,3 +45,17 @@ def word_vector_df(vocab, vec_size = 20, orientation="cols"):
     else:
         # TODO: throw an exception, error message for incorrect value entered.
         return None
+# ==============================================================================
+#                                                              CALC_HIDDEN_LAYER
+# ==============================================================================
+def calc_hidden_layer(words):
+    """
+
+    :param words: The context words
+    :return:
+    """
+    # aggregate the inputs
+    num_input_words = len(words)
+    in_vecs = in_df[words]  # Input word vectors
+    return in_vecs.sum(axis=1) / num_input_words       # Hidden layer.
+
