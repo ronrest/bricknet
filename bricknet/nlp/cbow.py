@@ -96,6 +96,8 @@ def train_one_example(context, output, alpha=0.01):
     :param alpha: {float}
     :return:
     """
+    global out_df
+    global in_df
     words = context
     correct_output = output
 
