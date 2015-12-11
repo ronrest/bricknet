@@ -89,6 +89,13 @@ def calc_hypotheses(z):
 #                                                             TRAIN_ONE_EXAMPLE
 # ==============================================================================
 def train_one_example(context, output, alpha=0.01):
+    """
+
+    :param context: {list of strings}
+    :param output: {string}
+    :param alpha: {float}
+    :return:
+    """
     words = context
     correct_output = output
 
