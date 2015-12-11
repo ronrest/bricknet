@@ -117,5 +117,7 @@ def train_one_example(context, output, alpha=0.01):
     out_df += -alpha * G_W_out
 
     # Update teh input word matrix
+    # TODO: find out what happens when you have the same word twice in a
+    #       context.
     inputs_update = -(1.0/len(words)) * alpha * G_a
     in_df[words] = in_df[words].add(inputs_update, axis="rows")
