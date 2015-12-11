@@ -151,3 +151,4 @@ def trainCBOW(iterations, alpha=0.01):
 
         train_one_example(window_words, center_word, alpha)
 
+    print "DOne training word vectors"
