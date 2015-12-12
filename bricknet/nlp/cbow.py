@@ -283,3 +283,37 @@ def trainCBOW2(alpha=0.01):
     print "DOne training word vectors"
     return cost
 
+
+
+
+# ##############################################################################
+#                                                                          SETUP
+# ##############################################################################
+file = "/tmp/corpus"
+
+with open(file, "r") as textFile:
+    corpus = textFile.read()
+
+
+# ------------------------------------------------------------------------------
+#                                                                 Clean up words
+# ------------------------------------------------------------------------------
+corpus = corpus.lower()  # lowercase
+corpus = corpus.replace(",", "")  # remove commas
+corpus = corpus.replace("!", "")  # remove exclamation
+corpus = corpus.replace("?", "")  # remove qmark
+corpus = corpus.replace(";", "")  # remove semi colon
+corpus = corpus.replace(":", "")  # remove colon
+corpus = corpus.replace(")", "")  # remove
+corpus = corpus.replace("(", "")  # remove
+corpus = corpus.replace("]", "")  # remove
+corpus = corpus.replace("[", "")  # remove
+corpus = corpus.replace("{", "")  # remove
+corpus = corpus.replace("}", "")  # remove
+corpus = corpus.replace("`", "")  # remove
+corpus = corpus.replace("?", " QUESTION ")  # remove
+corpus = corpus.replace("!", " EXCALMATION ")  # remove
+
+corpus = corpus.replace('"', " DOUBLE-QUOTE ")  # replace double quotes
+corpus = corpus.replace("'", " QUOTE ")  # replace single quotes
+print "Done cleaning up corpus"
