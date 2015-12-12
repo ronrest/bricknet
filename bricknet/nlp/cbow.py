@@ -372,3 +372,31 @@ import matplotlib.pyplot as plt
 fig, ax = plt.subplots()
 ax.plot(range(len(cost)), cost)
 
+
+# ------------------------------------------------------------------------------
+#                                                              PLOT WORD VECTORS
+# ------------------------------------------------------------------------------
+# DIMENTIONSLITY REDUCTION
+# The first two values of the U matrix correspond to the 2 biggest singlular values.
+U, s, Vh = np.linalg.svd(out_df + in_df.transpose(), full_matrices=False)
+#U, s, Vh = np.linalg.svd(out_df, full_matrices=False)
+SVD_out = pd.DataFrame(U, index=out_df.index)
+#SVD_out = out_df + in_df
+
+
+words_to_plot = ["has", "had", "have", "does", "did", "do",
+                 "run", "ran", "runs", "running",
+                 "read", "reading",
+                 "speaking", "spoke", "speak",
+                 "he", "she", "her", "his"]
+
+#in_df[""]
+
+vals = SVD_out.loc[words_to_plot, [0,1]]
+
+fig, ax = plt.subplots()
+ax.scatter(vals[0],vals[1], c="#319fe5", s=100, alpha=0.7, linewidths=0)
+
+for label in vals.index:
+    ax.annotate(label, (vals.loc[label][0],vals.loc[label][1]))
+
