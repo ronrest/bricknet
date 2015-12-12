@@ -346,3 +346,13 @@ vocab.add("EXCLAMATION")
 print "done creating vocab"
 
 
+
+# ------------------------------------------------------------------------------
+#                                              Create the word vector dataframes
+# ------------------------------------------------------------------------------
+word_vec_size = 100
+np.random.seed(234)
+in_df = word_vector_df(vocab, word_vec_size, orientation="cols")
+out_df = word_vector_df(vocab, word_vec_size, orientation="rows")
+print "done initialising word dataframes"
+
