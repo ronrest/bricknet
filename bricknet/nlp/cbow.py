@@ -356,3 +356,10 @@ in_df = word_vector_df(vocab, word_vec_size, orientation="cols")
 out_df = word_vector_df(vocab, word_vec_size, orientation="rows")
 print "done initialising word dataframes"
 
+
+# ------------------------------------------------------------------------------
+#                                                                       Run CBOW
+# ------------------------------------------------------------------------------
+#cost = trainCBOW(10000, alpha=0.025)
+cost = trainCBOW2(alpha=0.025)
+
