@@ -363,3 +363,12 @@ print "done initialising word dataframes"
 #cost = trainCBOW(10000, alpha=0.025)
 cost = trainCBOW2(alpha=0.025)
 
+
+# ------------------------------------------------------------------------------
+#                                                        Plot the Cost over time
+# ------------------------------------------------------------------------------
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots()
+ax.plot(range(len(cost)), cost)
+
