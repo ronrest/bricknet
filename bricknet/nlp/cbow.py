@@ -230,3 +230,56 @@ def trainCBOW(iterations, alpha=0.01):
     return cost
 
 
+
+
+
+def trainCBOW2(alpha=0.01):
+    cost = [666]*iterations     # initialise the cost over time
+    window_dims = [4,4]  # Number of words on either side of the center word
+    c_left  = window_dims[0]    # Number of context words to the left of center word
+    c_right = window_dims[1]    # Number of context words to the right of center word
+
+    num_sentences = len(sentences)
+
+    # A dictionary to keep track of percentage completed printout
+    # keys are the sentence number
+    # values are the percentage completed by that point
+    progress = np.linspace(0, num_sentences, num=101)
+    progress = {progress[i]: i for i in range(101)}
+    progress_keys = progress.keys()
+
+    for i in range(num_sentences):
+        # print progress
+        if i in progress_keys:
+            print "   {} % complete".format(progress[i])
+
+        sentence_list = sentences[i]
+
+        # Skips empty sentences
+        if sentence_list == []:
+            cost[i] = 333
+            continue
+
+        # Add Start and end of sentence tokens
+        sentence_list = c_left * ["START"] + sentence_list + ["END"] * c_right
+
+
+
+        for center_word_index in range(c_left, len(sentence_list) - c_right):
+            center_word = sentence_list[center_word_index]
+            context = sentence_list[center_word_index - c_left: center_word_index]
+            context += sentence_list[center_word_index +1 : center_word_index + c_right +1]
+
+            # TODO: this is a hack at the moment to stop dupicate words.
+            #       because i dont know what duplicate words do. Need to test if it
+            #       will behave properly with duplicates.
+            window_words = list(set(context))
+
+            # TODO: cost calculation is wrong. It is just giving the last
+            #       center word for the sentence. Should average the
+            #       cost for each sentence. 
+            cost[i] = train_one_example(window_words, center_word, alpha)
+
+    print "DOne training word vectors"
+    return cost
+
