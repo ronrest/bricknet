@@ -42,6 +42,32 @@ def get_vocab_from_string(s):
     return words
 
 
+# ==============================================================================
+#                                                  GET_VOCAB_FROM_SENTENCES_LIST
+# ==============================================================================
+def get_vocab_from_sentences_list(sl):
+    """
+    Creates a set of words from a string as the corpus.
+
+    :param sl: {iterable of iterables of strings}
+
+        List containing sentences. Each sentences being a list of strings.
+
+    :return: {set}
+
+        A set of all the unique words in the corpus.
+
+    """
+
+    # TODO: use a real word tokenisation function.
+
+    vocab = set()
+    for sentence in sentences:
+        vocab = vocab.union([word for word in sentence])
+
+    return vocab
+
+# ==============================================================================
 #                                                                 WORD_VECTOR_DF
 # ==============================================================================
 def word_vector_df(vocab, vec_size = 20, orientation="cols"):
@@ -77,6 +103,8 @@ def word_vector_df(vocab, vec_size = 20, orientation="cols"):
     else:
         # TODO: throw an exception, error message for incorrect value entered.
         return None
+
+
 # ==============================================================================
 #                                                              CALC_HIDDEN_LAYER
 # ==============================================================================
