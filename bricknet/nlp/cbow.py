@@ -332,3 +332,17 @@ sentences  = [s for s in sentences if s != ""] # remove empty sentences
 print "done creating sentences list"
 
 
+
+# ------------------------------------------------------------------------------
+#                                                                   Create Vocab
+# ------------------------------------------------------------------------------
+vocab = get_vocab_from_sentences_list(sentences)
+vocab.add("START")
+vocab.add("END")
+vocab.add("DOUBLE-QUOTE")
+vocab.add("QUOTE")
+vocab.add("QUESTION")
+vocab.add("EXCLAMATION")
+print "done creating vocab"
+
+
