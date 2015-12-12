@@ -189,14 +189,17 @@ def train_one_example(context, output, alpha=0.01):
 
 
 def trainCBOW(iterations, alpha=0.01):
+    cost = [666]*iterations     # initialise the cost over time
     window_dims = [4,4]  # Number of words on either side of the center word
     c_left  = window_dims[0]    # Number of context words to the left of center word
     c_right = window_dims[1]    # Number of context words to the right of center word
 
     #sentence = "the one and the only jones the magnificent"
-    for i in np.random.randint(low=0, high=len(sentences), size=iterations):
-        sentence_list = sentences[i].split()
-        #sentence_list = sentence.split()
+    # list of indices of sampled sentences
+    sample_indices = np.random.randint(low=0, high=len(sentences), size=iterations)
+
+    for i in range(iterations):
+        sentence_list = sentences[sample_indices[i]]
 
         # Add Start and end of sentence tokens
         sentence_list = c_left * ["START"] + sentence_list + ["END"] * c_right
@@ -216,6 +219,9 @@ def trainCBOW(iterations, alpha=0.01):
         #       will behave properly with duplicates.
         window_words = list(set(context))
 
-        train_one_example(window_words, center_word, alpha)
+        cost[i] = train_one_example(window_words, center_word, alpha)
 
     print "DOne training word vectors"
+    return cost
+
+
