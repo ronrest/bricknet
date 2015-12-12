@@ -317,3 +317,18 @@ corpus = corpus.replace("!", " EXCALMATION ")  # remove
 corpus = corpus.replace('"', " DOUBLE-QUOTE ")  # replace double quotes
 corpus = corpus.replace("'", " QUOTE ")  # replace single quotes
 print "Done cleaning up corpus"
+
+
+
+# ------------------------------------------------------------------------------
+#                                                          Sentence Segmentation
+# ------------------------------------------------------------------------------
+# Crude sentence segmentation.
+# TODO: use nltk to do a better job
+sentences = corpus.split(".")
+sentences = [sentence.split() for sentence in sentences]
+sentences  = [s for s in sentences if s != ""] # remove empty sentences
+
+print "done creating sentences list"
+
+
