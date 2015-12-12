@@ -201,6 +201,11 @@ def trainCBOW(iterations, alpha=0.01):
     for i in range(iterations):
         sentence_list = sentences[sample_indices[i]]
 
+        # Skips empty sentences
+        if sentence_list == []:
+            cost[i] = 333
+            continue
+
         # Add Start and end of sentence tokens
         sentence_list = c_left * ["START"] + sentence_list + ["END"] * c_right
 
