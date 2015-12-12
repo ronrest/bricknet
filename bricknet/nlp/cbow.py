@@ -166,6 +166,8 @@ def train_one_example(context, output, alpha=0.01):
     z = calc_preactivations_output_layer(a)
     h = calc_hypotheses(z)
 
+    cost = -np.log(h[correct_output])
+
     # Back propagation
     G_z = h.copy()
     G_z[correct_output]  -= 1
@@ -181,6 +183,11 @@ def train_one_example(context, output, alpha=0.01):
     #       context.
     inputs_update = -(1.0/len(words)) * alpha * G_a
     in_df[words] = in_df[words].add(inputs_update, axis="rows")
+
+    return cost
+
+
+
 def trainCBOW(iterations, alpha=0.01):
     window_dims = [4,4]  # Number of words on either side of the center word
     c_left  = window_dims[0]    # Number of context words to the left of center word
