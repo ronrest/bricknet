@@ -59,7 +59,27 @@ def get_sampling_distribution(c, power=3/4.0):
 
     p = c**float(power)  # Raise unigram counts to the 3/4
     return  p/p.sum()    # Normalize to make values add up to 1
+
+
+# ==============================================================================
+#                                                             GET_UNIGRAM_COUNTS
+# ==============================================================================
 def get_unigram_counts(sentences):
+    """
+    Takes an iterable of iterables containing individual words, and returns a
+    pandas Series contianing the words as indices, and the number of times
+    those words appeared in the corpus as the element values.
+
+    :param sentences: {iterable of iterables of strings}
+
+        Can be something like an outer list encapsulating all sentences. Each
+        sentence is a list of strings representing each word.
+
+    :return: {pandas.Series}
+
+        returns a pandas Series of the unigram word counts.
+    """
+    # ==========================================================================
     unigram = {}        # Tallies the unigram counts of words in corpus
 
     for sentence in sentences:
