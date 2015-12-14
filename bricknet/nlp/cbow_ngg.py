@@ -59,3 +59,14 @@ def get_sampling_distribution(c, power=3/4.0):
 
     p = c**float(power)  # Raise unigram counts to the 3/4
     return  p/p.sum()    # Normalize to make values add up to 1
+def get_unigram_counts(sentences):
+    unigram = {}        # Tallies the unigram counts of words in corpus
+
+    for sentence in sentences:
+        for word in sentence:
+            # create a tally of the words. If word does not already exist in the
+            # dictionary, then create a new element, and assign it the value of 1.
+            unigram[word] = unigram.get(word, 0) + 1
+
+    return pd.Series(unigram)
+
