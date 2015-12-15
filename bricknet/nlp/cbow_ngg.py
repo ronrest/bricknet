@@ -90,3 +90,13 @@ def get_unigram_counts(sentences):
 
     return pd.Series(unigram)
 
+
+def create_vocab_df(sentences, p_power=(3/4.0)):
+    u = get_unigram_counts(s)
+    p = get_sampling_distribution(u)
+    vocab = pd.DataFrame({"counts":u, "p":p, "i":range(len(u))})
+    vocab["words"] = vocab.index  # technically redundant, but intuitively more
+                                  # sensical to retreive the words using
+                                  # vocab.words (or vocab["words"] than using
+                                  # vocab.index
+    return vocab
