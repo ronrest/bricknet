@@ -91,7 +91,40 @@ def get_unigram_counts(sentences):
     return pd.Series(unigram)
 
 
+# ==============================================================================
+#                                                                CREATE_VOCAB_DF
+# ==============================================================================
 def create_vocab_df(sentences, p_power=(3/4.0)):
+    """
+
+    :param sentences: {iterable of iterables of strings}
+
+        Can be something like an outer list encapsulating all sentences. Each
+        sentence is a list of strings representing each word.
+
+    :param p_power: {float}
+
+        power to use for creating the sampling distribution, see the
+        power argument in get_sampling_distribution() function.
+
+        default value is (3/4.0)
+
+
+    :return: {pandas.DataFrame}
+
+        returns a dataframe with the following columns:
+
+            counts : the number of times the word occured in the corpus.
+
+            i      : the index of of this word in the word matrices.
+
+            p      : the sampling propability distribution for the words.
+
+                     - Used for negative sampling.
+
+            words  : An intuitive way to retreive the words in the vocabulary.
+    """
+    # ==========================================================================
     u = get_unigram_counts(s)
     p = get_sampling_distribution(u)
     vocab = pd.DataFrame({"counts":u, "p":p, "i":range(len(u))})
@@ -100,3 +133,4 @@ def create_vocab_df(sentences, p_power=(3/4.0)):
                                   # vocab.words (or vocab["words"] than using
                                   # vocab.index
     return vocab
+
