@@ -292,7 +292,18 @@ def words_matrix(vocab_size, vec_size = 20, orientation="cols", scale=1):
               '\n  be either "cols" or "rows"'
         raise ValueError(msg)
 
+
+# ==============================================================================
+#                                                                        SIGMOID
+# ==============================================================================
 def sigmoid(x):
+    """
+    Calculates the sigmoid value of x.
+
+    :param x: {number}
+    :return: {float}
+    """
+    # ==========================================================================
     #TODO: Check out http://stackoverflow.com/a/25164452 for potential
     #      optimisation of the sigmoid function.
     return 1 / (1 + np.exp(-x))
