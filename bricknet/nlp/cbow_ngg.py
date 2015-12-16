@@ -313,3 +313,59 @@ def train_one_window(input_words, y, k=5, alpha=0.01):
     correct_word = y
 
     # ==========================================================================
+    #                                                        Forward Propagation
+    # ==========================================================================
+    # TODO: try see what happens when words to not exist in vocab.
+
+    # --------------------------------------------------------------------------
+    #                                                     Calculate Hidden layer
+    # --------------------------------------------------------------------------
+    num_input_words = len(input_words)
+    input_word_indices = get_word_indices(vocab, words=input_words)
+    input_word_vectors = W_in[:,input_word_indices]
+    a = input_word_vectors.sum(axis=1) / num_input_words
+
+    # --------------------------------------------------------------------------
+    #                                         Calculate Subset of Weights to Use
+    # --------------------------------------------------------------------------
+    # The correct word will be the word in row 0, and all others will be the
+    # negative samples.
+    neg_sample_indices = get_sample_indices(vocab, k=k)
+    pos_sample_index = get_word_indices(vocab, correct_word)
+    sample_indices = np.concatenate([pos_sample_index, neg_sample_indices])
+    output_word_vectors = W_out[sample_indices, :]
+
+    # --------------------------------------------------------------------------
+    #                                                     Calculate Output layer
+    # --------------------------------------------------------------------------
+    z = output_word_vectors.dot(a)
+
+    # --------------------------------------------------------------------------
+    #                                                             Calculate Cost
+    # --------------------------------------------------------------------------
+    # TODO: optimise this by vetcorising and caching sigmoid(z) and taking
+    #       advantage of the property sigmoid(-z) = 1 - sigmoid(z)
+    J = -np.log(sigmoid(z[0])) - np.log(sigmoid(-z[1:])).sum()
+
+    # --------------------------------------------------------------------------
+    #                                                                  Gradients
+    # --------------------------------------------------------------------------
+    G_z = sigmoid(z)    # Gradient at the output layer
+    G_z[0] += -1        # Update gradient for correct word
+
+    G_W_out = np.outer(G_z, a)                     # Gradient of output word vectors
+    G_a = output_word_vectors.transpose().dot(G_z) # Gradient of hidden layer a
+
+    # --------------------------------------------------------------------------
+    #                                                          Update Parameters
+    # --------------------------------------------------------------------------
+
+    # ------------------------------------------------- Update Input Word Matrix
+    # Make G_a thicker to update multiple words in one go.
+    G_a = np.repeat([G_a], num_input_words, axis=0).transpose()
+    W_in[:,input_word_indices] += -(alpha/num_input_words) * G_a
+
+    # ----------------------------------------------- Update Output  Word Matrix
+    W_out[sample_indices, :] += (-alpha) * G_W_out
+
+    return J
