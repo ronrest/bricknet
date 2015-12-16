@@ -225,3 +225,18 @@ def get_sample_indices(vocab, k):
     # ==========================================================================
     return np.random.choice(vocab.i, size=k, p=vocab.p, replace=False)
 
+
+
+def words_matrix(vocab_size, vec_size = 20, orientation="cols", scale=1):
+    if orientation == "rows":
+        return (np.random.rand(vocab_size, vec_size)-0.5) * scale
+        #return pd.DataFrame(df, index=vocab)
+    elif orientation == "cols":
+        return  (np.random.rand(vec_size, vocab_size) - 0.5) * scale
+        #return pd.DataFrame(df, columns=vocab)
+    else:
+        msg = '\n  words_matrix() expects `orientation` argument to '\
+              '\n  be either "cols" or "rows"'
+        raise ValueError(msg)
+
+    # ==========================================================================
