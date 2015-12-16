@@ -163,13 +163,19 @@ def get_unigram_counts(sentences, window=8):
 # ==============================================================================
 #                                                                CREATE_VOCAB_DF
 # ==============================================================================
-def create_vocab_df(sentences, p_power=(3/4.0)):
+def create_vocab_df(sentences, window=8, p_power=(3/4.0)):
     """
 
     :param sentences: {iterable of iterables of strings}
 
         Can be something like an outer list encapsulating all sentences. Each
         sentence is a list of strings representing each word.
+
+    :param window: {int or list of two ints}
+
+        number of words to use as the window context.
+
+        can be asymetrical by using a list of two values.
 
     :param p_power: {float}
 
@@ -194,7 +200,7 @@ def create_vocab_df(sentences, p_power=(3/4.0)):
             words  : An intuitive way to retreive the words in the vocabulary.
     """
     # ==========================================================================
-    u = get_unigram_counts(s)
+    u = get_unigram_counts(sentences, window=window)
     p = get_sampling_distribution(u)
     vocab = pd.DataFrame({"counts":u, "p":p, "i":range(len(u))})
     vocab["words"] = vocab.index  # technically redundant, but intuitively more
