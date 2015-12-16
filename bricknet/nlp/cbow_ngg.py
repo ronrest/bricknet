@@ -209,3 +209,7 @@ def create_vocab_df(sentences, window=8, p_power=(3/4.0)):
                                   # vocab.index
     return vocab
 
+
+def get_sample_indices(vocab, k):
+    return np.random.choice(vocab.i, size=k, p=vocab.p, replace=False)
+
