@@ -226,7 +226,25 @@ def get_sample_indices(vocab, k):
     return np.random.choice(vocab.i, size=k, p=vocab.p, replace=False)
 
 
+# ==============================================================================
+#                                                                 GET_WORD_INDEX
+# ==============================================================================
 def get_word_indices(vocab, words):
+    """
+    takes a word string, or a list of strings,  and returns the index(es) of the
+    word(s).
+
+    :param vocab: {DataFrame}
+
+        Vacabulary dataframe
+
+    :param words: {string, or list of strings}
+
+        the word(s) you want to get the index for.
+
+    :return:
+    """
+    # ==========================================================================
     if isinstance(words, str):
         words = [words]
     return vocab["i"][words]
