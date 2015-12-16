@@ -102,7 +102,7 @@ def get_sampling_distribution(c, power=3/4.0):
 # ==============================================================================
 #                                                             GET_UNIGRAM_COUNTS
 # ==============================================================================
-def get_unigram_counts(sentences):
+def get_unigram_counts(sentences, window=8):
     """
     Takes an iterable of iterables containing individual words, and returns a
     pandas Series contianing the words as indices, and the number of times
@@ -113,6 +113,16 @@ def get_unigram_counts(sentences):
         Can be something like an outer list encapsulating all sentences. Each
         sentence is a list of strings representing each word.
 
+    :param window {list, or int}
+
+        window size to use for context. must be either an integer, for a
+        symetrical window, or, for an asymentrical window, you use a list of
+        two integer elements.  The first element is for the number of words to
+        the left, and the second element is for the number of words to the right
+        to use as the context window.
+
+        default = 8
+
     :return: {pandas.Series}
 
         returns a pandas Series of the unigram word counts.
@@ -120,7 +130,28 @@ def get_unigram_counts(sentences):
     # ==========================================================================
     unigram = {}        # Tallies the unigram counts of words in corpus
 
+    # --------------------------------------------------------------------------
+    #                                                         handle window size
+    # --------------------------------------------------------------------------
+    if isinstance(window, (int, long)):
+        c_left  = window / 2
+        c_right = c_left
+    elif (isinstance(window, list)
+    and (len(window) > 1)
+    and isinstance(window[0], (int, long))
+    and isinstance(window[1], (int, long))):
+        c_left  = window[0]
+        c_right = window[1]
+    else:
+        msg = "\n  get_unigram_counts() expects the `window` argument to be an"\
+              "\n  integer, or a list of two integers."
+        raise ValueError(msg)
+
+    # --------------------------------------------------------------------------
+    #                                                     Loop through sentences
+    # --------------------------------------------------------------------------
     for sentence in sentences:
+        sentence = pad_sentence_list(sentence, c_left, c_right)
         for word in sentence:
             # create a tally of the words. If word does not already exist in the
             # dictionary, then create a new element, and assign it the value of 1.
