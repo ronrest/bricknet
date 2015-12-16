@@ -10,7 +10,39 @@ import pandas as pd
 np = pd.np
 
 
+# ==============================================================================
+#                                                              PAD_SENTENCE_LIST
+# ==============================================================================
 def pad_sentence_list(s, c_left, c_right, start="START", end="END"):
+    """
+    Pad the left and right of a sentence with Start of sentence and end of
+    sentence tokens.
+
+    :param s: {list of strings}
+
+        The list of strings representing a sentence.
+
+    :param c_left: {int}
+
+        The number of context words to the left
+
+    :param c_right: {int}
+
+        The number of context words to the left
+
+    :param start: {string}
+
+        default = "START"
+
+    :param end:  {string}
+
+        default = "END"
+
+    :return: {list}
+
+        same list, but with start and end of sentence padded words.
+    """
+    # ==========================================================================
     return c_left * [start] + s + [end] * c_right
 
 
