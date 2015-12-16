@@ -226,6 +226,10 @@ def get_sample_indices(vocab, k):
     return np.random.choice(vocab.i, size=k, p=vocab.p, replace=False)
 
 
+def get_word_indices(vocab, words):
+    if isinstance(words, str):
+        words = [words]
+    return vocab["i"][words]
 
 
 # ==============================================================================
