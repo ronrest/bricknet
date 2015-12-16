@@ -8,6 +8,12 @@ __author__ = 'ronny'
 
 import pandas as pd
 np = pd.np
+
+
+def pad_sentence_list(s, c_left, c_right, start="START", end="END"):
+    return c_left * [start] + s + [end] * c_right
+
+
 # ==============================================================================
 #                                                      GET_SAMPLING_DISTRIBUTION
 # ==============================================================================
