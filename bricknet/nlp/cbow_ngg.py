@@ -308,7 +308,31 @@ def sigmoid(x):
     #      optimisation of the sigmoid function.
     return 1 / (1 + np.exp(-x))
 
+
+# ==============================================================================
+#                                                               TRAIN_ONE_WINDOW
+# ==============================================================================
 def train_one_window(input_words, y, k=5, alpha=0.01):
+    """
+
+    :param input_words: {list, or array-like of strings}
+
+        list of words to use as input words context.
+
+    :param y: {string}
+
+        The correct output word
+
+    :param k: {int}
+
+        The number of negative samples to use.
+
+    :param alpha: {float}
+
+        learning rate.
+
+    :return:
+    """
     global W_in, W_out, vocab
     correct_word = y
 
@@ -369,3 +393,4 @@ def train_one_window(input_words, y, k=5, alpha=0.01):
     W_out[sample_indices, :] += (-alpha) * G_W_out
 
     return J
+
