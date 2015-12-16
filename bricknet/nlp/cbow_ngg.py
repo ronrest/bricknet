@@ -308,4 +308,8 @@ def sigmoid(x):
     #      optimisation of the sigmoid function.
     return 1 / (1 + np.exp(-x))
 
+def train_one_window(input_words, y, k=5, alpha=0.01):
+    global W_in, W_out, vocab
+    correct_word = y
+
     # ==========================================================================
