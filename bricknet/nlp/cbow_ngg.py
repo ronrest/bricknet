@@ -227,7 +227,38 @@ def get_sample_indices(vocab, k):
 
 
 
+
+# ==============================================================================
+#                                                                   WORDS_MATRIX
+# ==============================================================================
 def words_matrix(vocab_size, vec_size = 20, orientation="cols", scale=1):
+    """
+    Creates a matrix (array) for the word vectors.
+
+    :param vocab_size: {int, or long}
+
+        number of words in the vocabulary.
+
+    :param vec_size: {int}
+
+        The size of the word vectors. Good values are somewhere between 20-300.
+
+    :param orientation: {str}
+
+        "cols" = Each word vector is a column in the dataframe
+
+        "rows" = Each word vector is a row in the dataframe
+
+    :param scale: {number}
+
+        by default it returns weights as random values between 0 and 1. You
+        can scale it to be random numbers between 0 and another number.
+
+
+    :return: {array}
+
+    """
+    # ==========================================================================
     if orientation == "rows":
         return (np.random.rand(vocab_size, vec_size)-0.5) * scale
         #return pd.DataFrame(df, index=vocab)
