@@ -210,6 +210,18 @@ def create_vocab_df(sentences, window=8, p_power=(3/4.0)):
     return vocab
 
 
+# ==============================================================================
+#                                                             GET_SAMPLE_INDICES
+# ==============================================================================
 def get_sample_indices(vocab, k):
+    """
+    Takes a vocabulary dataframe and returns the indices of k randomly sampled
+    words.
+
+    :param vocab:
+    :param k:
+    :return:
+    """
+    # ==========================================================================
     return np.random.choice(vocab.i, size=k, p=vocab.p, replace=False)
 
