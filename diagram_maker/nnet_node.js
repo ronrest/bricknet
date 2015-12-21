@@ -316,6 +316,7 @@ function latexOnCanvas(context, latex, x, y, color="000000", size=10){
     sizes[9] = "small"
     sizes[10] = ""
     sizes[12] = "large"
+    sizes[15] = "Large"
     sizes[18] = "LARGE"
     sizes[20] = "huge"
 
