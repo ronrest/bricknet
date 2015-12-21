@@ -47,6 +47,33 @@ function LayerOfNodes(x,y, n, dims=dims1, themes=THEME_DEFAULT, n_in=1, n_out=1,
     }
 
     // =========================================================================
+    this.forward_connection = function (ctx, to_node, colors="#AAAAAA", size=3, d=100, d2=100, use_wa=false, use_wb=false, alpha=0.3){
+        // TODO: give option to skip connecting to the first node in the target (Bias Node)
+
+        if (!Array.isArray(colors)){
+            var cols = new Array(this.n);
+            cols.fill(colors);
+            colors = cols;
+        }
+
+        // handle position of nodes along side face of each node
+        var wa = -1;
+        var wb = -1;
+
+        // Do not make connections to a bias node.
+        if (to_node.is_bias){return;};
+
+        for (var j = 0; j < this.n; j++){
+            from_node = this.nodes[j]
+
+            // handle psoition along side edges the nodes
+            if (use_wa){wa = i}; // Index of connection on edge of from_node
+            if (use_wb){wb = j}; // Index of connection on edge of to_node
+
+            from_node.connect_to(ctx, to_node, wa=wa, wb=wb, color=colors[j] ,size, d, d2, alpha);
+        }
+    }
+
     //                                                     FORWARD_CONNECTIONS()
     // =========================================================================
     // colors = If a string is used. All connections will be same color.
