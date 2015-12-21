@@ -295,8 +295,11 @@ function layer_nodes_y(n, height, space, y=0){
 // shift = if you want the indices on the displayet text to start from 1, then
 //         shift by 1.
 //         if you want the indices to start from 0, then shift by 0
+// y_shift = a hack to try allign the text when using superscripts. Value is
+//           proportional to text size
+//           Default value is 1.5.
 // =============================================================================
-function draw_layer_text(context, layer, layer_num, latex_a="", latex_b="", size=12, shift=1){
+function draw_layer_text(context, layer, layer_num, latex_a="", latex_b="", size=12, shift=1, y_shift=1.5){
     var font_size = size;
     var latex = "";
 
@@ -304,7 +307,7 @@ function draw_layer_text(context, layer, layer_num, latex_a="", latex_b="", size
     //                                                Declare position variables
     // -------------------------------------------------------------------------
     var x_offset = 10;
-    var y_offset = layer.nodes[0].dims.height - layer.nodes[0].dims.radius - 1.5* font_size;
+    var y_offset = layer.nodes[0].dims.height - layer.nodes[0].dims.radius - y_shift* font_size;
     var x_pos = layer.nodes[0].x + x_offset;
     var y_pos = layer.nodes[0].y + y_offset;
 
