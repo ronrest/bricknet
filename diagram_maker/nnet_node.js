@@ -268,6 +268,14 @@ var THEME_TANGERINE = new NodeTheme(a="#FF4C00",b="#FF9A6F", border="#E24300", f
 var THEME_FUSCIA = new NodeTheme(a="#CF45D9",b="#F7B3FB", border="#CA22D5", fg_a="#FFFFFF", fg_b="#690B70");
 
 
+var THEME_MONO_GREEN =  new NodeTheme(a="#C1F9C8",b="#C1F9C8", border="#009412", fg_a="#176220", fg_b="#176220");
+var THEME_MONO_ORANGE = new NodeTheme(a="#FFE8C6",b="#FFE8C6", border="#DD8B16", fg_a="#813805", fg_b="#813805");
+var THEME_MONO_PURPLE = new NodeTheme(a="#D2C5F6",b="#D2C5F6", border="#30118C", fg_a="#1E0469", fg_b="#1E0469");
+var THEME_MONO_BLUE =   new NodeTheme(a="#AFC8FF",b="#AFC8FF", border="#2F6AE9", fg_a="#021D54", fg_b="#021D54");
+var THEME_MONO_TANGERINE = new NodeTheme(a="#FF9A6F",b="#FF9A6F", border="#E24300", fg_a="#3D1200", fg_b="#3D1200");
+var THEME_MONO_FUSCIA = new NodeTheme(a="#F7B3FB",b="#F7B3FB", border="#CA22D5", fg_a="#690B70", fg_b="#690B70");
+
+
 
 var THEME_GREY_DARK = new NodeTheme(a="#424242",b="#848484", border="#333333", fg_a="#FFFFFF", fg_b="#222222");
 var THEME_GREY_MED = new NodeTheme(a="#7E7E7E",b="#D4D4D4", border="#505050", fg_a="#FFFFFF", fg_b="#333333");
