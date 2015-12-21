@@ -146,6 +146,31 @@ function LayerOfNodes(x,y, n, dims=dims1, themes=THEME_DEFAULT, n_in=1, n_out=1,
 
     }
 
+    // =========================================================================
+    //                                                          BACK_CONNECTION()
+    // =========================================================================
+    // back propagation COnnections Of a single node.
+    // QUICK UGLY HACKY IMPLEMENTATION
+    // TODO: Create a a more intuitive version of this.
+    //
+    // node_num = the node number in the current layer
+    //
+    // colors = If a string is used. All connections will be same color.
+    //          If an array is used, it should be same size as the number of
+    //          elements in current layer, representing colors for each cluster
+    //          of lines connecting to each target node.
+    //
+    // size = thickness of the connection lines
+    // d = How far the control point should stick out relative to the starting
+    //     position.
+    // d2 = as per d, but relative to the end point.
+    //
+    // use_wa = Use evenly distributed weight connections along the side face of
+    //          the starting node?
+    // use_wb = Use evenly distributed weight connections along the side face of
+    //          the target node?
+    // alpha = alpha of the connection lines
+    // =========================================================================
     this.back_connection = function (ctx, node_num, next_layer, colors="#AAAAAA", size=3, d=100, d2=100, use_wa=false, use_wb=false, alpha=0.3){
         // TODO: give option to skip connecting to the first node in the target (Bias Node)
 
@@ -226,7 +251,6 @@ function LayerOfNodes(x,y, n, dims=dims1, themes=THEME_DEFAULT, n_in=1, n_out=1,
                 from_node.connect_to(ctx, to_node, wa=wa, wb=wb, color=colors[j] ,size, d, d2, alpha);
             }
         }
-
     }
 
 
