@@ -5,5 +5,4 @@
 """
 __author__ = 'ronny'
 
-if __name__ == '__main__':
-    unittest.main()
+from tanh import tanh, tanh_prime
