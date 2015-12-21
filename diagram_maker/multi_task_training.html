@@ -1,0 +1,85 @@
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="nnet_node.js"></script>
+    <script type="text/javascript" src="nnet_layers.js"></script>
+    <script type="text/javascript" src="bez.js"></script>
+    <title>Example of Drawing Neural Nets</title>
+</head>
+<body>
+<p>
+NLP. Classifying a window context of words as either gramatical or ungramatical.
+</p>
+
+<br><br>
+<canvas id="node" width="1200" height="500"></canvas>
+<script>
+    var ctx = document.getElementById("node").getContext("2d");
+
+    // -------------------------------------------------------------------------
+    //                                          Set up node and layer properties
+    // -------------------------------------------------------------------------
+    var x1 = 10;        // x position of first layer
+    var y1 = 40;        // y position of first layer
+    var n1 = 13;         // number of nodes on first layer
+
+    var x2 = 200;       // x position of second layer
+    var y2 = 10;        // y position of second layer
+    var n2 = 8;         // number of nodes on second layer
+
+    var x3 = 400;       // x position of third layer
+    var y3 = 120;        // y position of third layer
+    var n3 = 1;         // number of nodes on third layer
+
+
+    // -------------------------------------------------------------------------
+    //                                        Create dimension Objects for Nodes
+    // -------------------------------------------------------------------------
+    var my_input_dims = new NodeDims(width_a=50, width_b=-1, height=10, radius=3, border=3);
+    var my_dims = new NodeDims(width_a=40, width_b=50, height=30, radius=10, border=3);
+    var my_output_dims = new NodeDims(width_a=70, width_b=-1, height=50, radius=20, border=3);
+
+    // -------------------------------------------------------------------------
+    //                                            Create Theme Objects for Nodes
+    // -------------------------------------------------------------------------
+    // Set theme for each node of each layer
+    themes_l1 = [THEME_INPUT_GREY, THEME_BLUE, THEME_BLUE, THEME_BLUE, THEME_BLUE,
+                 THEME_ORANGE, THEME_ORANGE, THEME_ORANGE, THEME_ORANGE,
+                 THEME_PURPLE, THEME_PURPLE, THEME_PURPLE, THEME_PURPLE];
+    themes_l2 = THEME_GREY_LIGHT;
+    themes_l3 = [THEME_MONO_BLUE];
+
+
+    // -------------------------------------------------------------------------
+    //                                                    Create Layers of Nodes
+    // -------------------------------------------------------------------------
+    var l1 = new LayerOfNodes(x1, y1, n1, dims=my_input_dims, themes=themes_l1, n_in=1, n_out=n2, space=5,bias=true);
+    var l2 = new LayerOfNodes(x2, y2, n2, dims=my_dims, themes=themes_l2, n_in=n1, n_out=n3, space=10);
+    var l3 = new LayerOfNodes(x3, y3, n3, dims=my_output_dims, themes=themes_l3, n_in=n2, n_out=1, space=20);
+
+
+    // -------------------------------------------------------------------------
+    //                                           Draw Connections Between Layers
+    // -------------------------------------------------------------------------
+    var w_colors_ab = extract_colors_from_themes(themes_l1);
+    var w_colors_bc = extract_colors_from_themes([THEME_BLUE]);
+
+    l1.back_connections(ctx, l2, colors=w_colors_ab, size=2, d=50, d2=100, use_wa=false, use_wb=true, alpha=0.4);
+    l2.forward_connections(ctx, l3, colors=w_colors_bc, size=2, d=50, d2=100, use_wa=false, use_wb=true, alpha=0.4);
+
+    // -------------------------------------------------------------------------
+    //                                                            Draw the Nodes
+    // -------------------------------------------------------------------------
+    l1.draw(ctx);
+    l2.draw(ctx);
+    l3.draw(ctx);
+
+    // -------------------------------------------------------------------------
+    //                                                Draw the Text on the Nodes
+    // -------------------------------------------------------------------------
+    //draw_layer_text(ctx, l1, 1, latex_a="x_{III}^{(LLL)}", latex_b="", size=9, shift=1, y_shift=2.5);
+    draw_layer_text(ctx, l2, 2, latex_a="z_{III}", latex_b="a_{III}", size=9,  shift=1, y_shift=1.0);
+    draw_layer_text(ctx, l3, 3, latex_a="score", latex_b="", size=12, shift=1, y_shift=1.0);
+
+</script>
+
+</body>
