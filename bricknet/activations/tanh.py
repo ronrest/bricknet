@@ -17,3 +17,6 @@ def tanh(z):
     # ==========================================================================
     return (z > 0) * z
 
+
+def tanh_prime(z, as_int=True):
+    return (z > 0).astype(int) if as_int else (z > 0).astype(float)
